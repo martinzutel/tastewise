@@ -1,0 +1,188 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/* The product is light-only for now; dark: utilities only apply under an explicit .dark class. */
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Tastewise design tokens.
+ * Brand palette comes from the product brief. "-ink" variants are darker
+ * versions used only where the color carries small text, so it meets
+ * WCAG AA contrast on the paper background.
+ */
+:root {
+  --paper: #f8f7f2;
+  --paper-2: #f0eee7;
+  --paper-3: #e9e6dc;
+  --ink: #252720;
+  --ink-muted: #6c6b63;
+  --ink-faint: #737269; /* brief #77766e, nudged to reach 4.5:1 on paper */
+  --sage: #73846a;
+  --sage-ink: #4f5e48;
+  --sage-wash: #e6eadf;
+  --clay: #c47c55;
+  --clay-ink: #8f5130;
+  --clay-wash: #f4e6dc;
+  --line: #e5e2d9;
+  --line-strong: #d6d2c6;
+  --surface: #ffffff;
+
+  /* shadcn/ui semantic mapping */
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--surface);
+  --card-foreground: var(--ink);
+  --popover: var(--surface);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--paper);
+  --secondary: var(--paper-2);
+  --secondary-foreground: var(--ink);
+  --muted: var(--paper-2);
+  --muted-foreground: var(--ink-muted);
+  --accent: var(--paper-2);
+  --accent-foreground: var(--ink);
+  --destructive: #a8432c;
+  --border: var(--line);
+  --input: var(--line-strong);
+  --ring: var(--sage);
+  --radius: 0.5rem;
+
+  --header-h: 4.25rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-paper-3: var(--paper-3);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+  --color-sage: var(--sage);
+  --color-sage-ink: var(--sage-ink);
+  --color-sage-wash: var(--sage-wash);
+  --color-clay: var(--clay);
+  --color-clay-ink: var(--clay-ink);
+  --color-clay-wash: var(--clay-wash);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-surface: var(--surface);
+
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-cormorant), "Iowan Old Style", Georgia, serif;
+  --font-heading: var(--font-serif);
+
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 12px;
+  --radius-2xl: 14px;
+
+  /* Type scale (1.25 ratio, 16px base) */
+  --text-display: clamp(3.1rem, 2rem + 4.6vw, 6.4rem);
+  --text-display--line-height: 0.94;
+  --text-display--letter-spacing: -0.015em;
+  --text-headline: clamp(2.3rem, 1.7rem + 2.4vw, 3.8rem);
+  --text-headline--line-height: 1;
+  --text-headline--letter-spacing: -0.01em;
+  --text-title: clamp(1.75rem, 1.45rem + 1.1vw, 2.45rem);
+  --text-title--line-height: 1.05;
+
+  --animate-pop: pop 280ms cubic-bezier(0.22, 1, 0.36, 1);
+  @keyframes pop {
+    0% {
+      transform: scale(1);
+    }
+    45% {
+      transform: scale(1.18);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply bg-paper font-sans text-ink antialiased;
+    text-rendering: optimizeLegibility;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply min-h-dvh bg-paper text-[15px] leading-relaxed text-ink sm:text-base;
+    font-feature-settings: "ss01", "cv11";
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  ::selection {
+    background: var(--sage-wash);
+    color: var(--ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--sage);
+    outline-offset: 2px;
+  }
+  /* Reduced motion: remove movement (scale, slide, smooth scroll) but keep
+     colour and opacity changes so state feedback stays visible. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation: none !important;
+      scroll-behavior: auto !important;
+      transition-property: color, background-color, border-color, opacity !important;
+    }
+  }
+}
+
+@layer components {
+  .font-display {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-optical-sizing: auto;
+  }
+  /* Horizontal rails: native scroll with snap, no visible scrollbar. */
+  .rail {
+    display: grid;
+    grid-auto-flow: column;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+  .rail::-webkit-scrollbar {
+    display: none;
+  }
+  .rail > * {
+    scroll-snap-align: start;
+  }
+}
