@@ -8,7 +8,10 @@ import type { Recipe, RecipeQuery, RecipeSummary, SortOption } from "../types";
  */
 
 function normalize(s: string): string {
-  return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+  return s
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
 }
 
 /** Weighted text index: title > ingredients/cuisine/category > description. */
