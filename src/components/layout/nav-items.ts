@@ -14,7 +14,7 @@ export const NAV_ITEMS: NavItem[] = [
   { href: "/recipes", label: "Explore recipes", short: "Explore", icon: SearchIcon },
   { href: "/pantry", label: "My pantry", short: "Pantry", icon: WheatIcon },
   { href: "/saved", label: "Saved", short: "Saved", icon: BookmarkIcon },
-  { href: "/shopping-list", label: "Shopping list", short: "List", icon: ListChecksIcon },
+  { href: "/shopping-list", label: "Shopping list", short: "Shopping", icon: ListChecksIcon },
 ];
 
 export function isActive(item: NavItem, pathname: string): boolean {

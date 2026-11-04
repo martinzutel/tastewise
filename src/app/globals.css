@@ -143,6 +143,14 @@
   p {
     text-wrap: pretty;
   }
+  /* iOS Safari zooms into any field under 16px on focus. */
+  @media (max-width: 639px) {
+    input,
+    select,
+    textarea {
+      font-size: 16px !important;
+    }
+  }
   ::selection {
     background: var(--sage-wash);
     color: var(--ink);
@@ -161,6 +169,13 @@
       scroll-behavior: auto !important;
       transition-property: color, background-color, border-color, opacity !important;
     }
+  }
+}
+
+/* Sonner applies its mobile offset only below 600px; the tab bar is visible up to 1023px. */
+@media (min-width: 600px) and (max-width: 1023px) {
+  [data-sonner-toaster] {
+    --offset-bottom: 88px !important;
   }
 }
 

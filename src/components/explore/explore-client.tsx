@@ -125,8 +125,9 @@ export function ExploreClient({
       </aside>
 
       <div className="min-w-0">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-          <div className="relative flex-1">
+        {/* On phones search and filters stay pinned under the header as one compact row. */}
+        <div className="sticky top-[var(--header-h)] z-20 -mx-5 flex items-center gap-2 border-b border-line bg-paper/95 px-5 py-2.5 backdrop-blur-md sm:-mx-8 sm:gap-3 sm:px-8 lg:static lg:mx-0 lg:border-0 lg:bg-transparent lg:p-0 lg:backdrop-blur-none">
+          <div className="relative min-w-0 flex-1">
             <SearchIcon
               className="pointer-events-none absolute top-1/2 left-3.5 size-[18px] -translate-y-1/2 text-ink-faint"
               aria-hidden
@@ -137,9 +138,10 @@ export function ExploreClient({
             <input
               id="explore-search"
               type="search"
+              enterKeyHint="search"
               value={text}
               onChange={(e) => setText(e.target.value)}
-              placeholder="Search by recipe, ingredient, cuisine or meal"
+              placeholder="Search recipes"
               className="h-12 w-full rounded-md border border-line-strong bg-surface pr-10 pl-11 text-[0.98rem] transition-[border-color,box-shadow] outline-none placeholder:text-ink-faint focus:border-sage focus:shadow-[0_0_0_3px_var(--sage-wash)]"
             />
             {text && (
@@ -154,12 +156,12 @@ export function ExploreClient({
             )}
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex shrink-0 items-center gap-2">
             <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
               <SheetTrigger asChild>
-                <Button variant="outline" className="h-12 flex-1 lg:hidden">
+                <Button variant="outline" className="h-12 bg-surface px-3.5 lg:hidden" aria-label="Filters and sorting">
                   <SlidersHorizontalIcon aria-hidden />
-                  Filters
+                  <span className="hidden min-[400px]:inline">Filters</span>
                   {activeCount > 0 && (
                     <span className="rounded-sm bg-sage-ink px-1.5 text-xs font-semibold text-white">
                       {activeCount}
@@ -169,10 +171,36 @@ export function ExploreClient({
               </SheetTrigger>
               <SheetContent side="left" className="w-[88vw] max-w-sm gap-0 bg-paper p-0">
                 <SheetHeader className="border-b border-line px-5 py-4">
-                  <SheetTitle className="font-display text-2xl font-medium">Filters</SheetTitle>
+                  <SheetTitle className="font-display text-2xl font-medium">Filter and sort</SheetTitle>
                   <SheetDescription>Results update as you choose.</SheetDescription>
                 </SheetHeader>
-                <div className="flex-1 overflow-y-auto px-4 py-6">{filterPanel}</div>
+                <div className="flex-1 overflow-y-auto px-4 py-6">
+                  <fieldset className="mb-8 sm:hidden">
+                    <legend className="mb-3 text-[0.8rem] font-semibold text-ink">Sort by</legend>
+                    <div className="flex flex-wrap gap-2">
+                      {sortOptions.map((s) => {
+                        const active = (query.sort ?? "popular") === s;
+                        return (
+                          <button
+                            key={s}
+                            type="button"
+                            aria-pressed={active}
+                            onClick={() => navigate({ ...query, sort: s })}
+                            className={cn(
+                              "inline-flex h-10 items-center rounded-md border px-3 text-sm transition-colors",
+                              active
+                                ? "border-sage bg-sage-wash font-medium text-sage-ink"
+                                : "border-line-strong text-ink hover:bg-paper-2",
+                            )}
+                          >
+                            {SORT_LABELS[s]}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </fieldset>
+                  {filterPanel}
+                </div>
                 <SheetFooter className="flex-row gap-3 border-t border-line px-5 py-4">
                   <Button variant="ghost" className="flex-1" onClick={reset} disabled={activeCount === 0}>
                     Clear all
@@ -189,7 +217,7 @@ export function ExploreClient({
               onValueChange={(v) => navigate({ ...query, sort: v as SortOption })}
             >
               <SelectTrigger
-                className="h-12! flex-1 border-line-strong bg-surface px-3.5 sm:w-48"
+                className="hidden h-12! border-line-strong bg-surface px-3.5 sm:flex sm:w-48"
                 aria-label="Sort recipes"
               >
                 <SelectValue />
@@ -215,7 +243,7 @@ export function ExploreClient({
               key={`${c.key}-${c.value}`}
               type="button"
               onClick={() => removeChip(c.key, c.value)}
-              className="inline-flex h-8 items-center gap-1.5 rounded-md border border-line-strong bg-surface pr-2 pl-3 text-[0.82rem] text-ink transition-colors hover:border-ink/30"
+              className="inline-flex h-9 items-center gap-1.5 rounded-md border border-line-strong bg-surface pr-2 pl-3 text-[0.82rem] text-ink transition-colors hover:border-ink/30 sm:h-8"
               aria-label={`Remove filter: ${c.label}`}
             >
               {c.label}

@@ -9,6 +9,7 @@ import { DifficultyMark, Rating } from "@/components/recipe/recipe-meta";
 import { IngredientsPanel } from "@/components/recipe-detail/ingredients-panel";
 import { MethodSteps } from "@/components/recipe-detail/method-steps";
 import { RecipeActions } from "@/components/recipe-detail/recipe-actions";
+import { RecipeJumpNav } from "@/components/recipe-detail/jump-nav";
 import { CATEGORY_LABELS, DIET_LABELS, DIFFICULTY_LABELS, SERVING_OPTIONS } from "@/lib/constants";
 import { getRecipeBySlug, listRecipeSummaries } from "@/lib/data/recipes";
 import { formatMinutes } from "@/lib/format";
@@ -66,9 +67,10 @@ export default async function RecipePage({ params }: { params: Params }) {
   const lastSpan = facts.length % factCols === 0 ? 1 : factCols - (facts.length % factCols) + 1;
 
   return (
-    <article>
-      <Container>
-        <nav aria-label="Breadcrumb" className="pt-6 sm:pt-8">
+    // Phones: photo straight after the back link, then the title. Larger screens: title first, wide photo below.
+    <article className="flex flex-col">
+      <Container className="order-1">
+        <nav aria-label="Breadcrumb" className="pt-4 sm:pt-8">
           <ol className="flex items-center gap-1 text-sm text-ink-muted">
             <li>
               <Link href="/recipes" className="inline-flex items-center gap-1 hover:text-ink">
@@ -85,8 +87,10 @@ export default async function RecipePage({ params }: { params: Params }) {
             )}
           </ol>
         </nav>
+      </Container>
 
-        <header className="grid gap-8 pt-6 pb-10 lg:grid-cols-[1.25fr_1fr] lg:items-end lg:gap-16 lg:pt-8">
+      <Container className="order-3 sm:order-2">
+        <header className="grid gap-7 pt-6 pb-4 sm:gap-8 sm:pb-10 lg:grid-cols-[1.25fr_1fr] lg:items-end lg:gap-16 lg:pt-8">
           <div>
             <h1 className="font-display text-display text-ink">{recipe.title}</h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-ink-muted">{recipe.description}</p>
@@ -125,7 +129,7 @@ export default async function RecipePage({ params }: { params: Params }) {
         </header>
       </Container>
 
-      <div className="mx-auto max-w-[1520px] sm:px-8">
+      <div className="order-2 mx-auto mt-4 w-full max-w-[1520px] sm:order-3 sm:mt-0 sm:px-8">
         <div className="relative aspect-[4/3] overflow-hidden bg-paper-3 sm:aspect-[16/9] sm:rounded-xl lg:aspect-[21/9]">
           <Image
             src={recipe.imageUrl.replace("w=1200", "w=2000")}
@@ -138,9 +142,13 @@ export default async function RecipePage({ params }: { params: Params }) {
         </div>
       </div>
 
-      <Container>
-        <div className="grid gap-14 pt-14 lg:grid-cols-[minmax(300px,380px)_1fr] lg:gap-20 lg:pt-20">
-          <aside className="lg:sticky lg:top-[calc(var(--header-h)+2rem)] lg:self-start">
+      <Container className="order-4">
+        <RecipeJumpNav />
+        <div className="grid gap-14 pt-8 sm:pt-14 lg:grid-cols-[minmax(300px,380px)_1fr] lg:gap-20 lg:pt-20">
+          <aside
+            id="ingredients"
+            className="scroll-mt-[calc(var(--header-h)+4.5rem)] lg:sticky lg:top-[calc(var(--header-h)+2rem)] lg:self-start"
+          >
             <IngredientsPanel
               recipeTitle={recipe.title}
               ingredients={recipe.ingredients}
@@ -151,7 +159,9 @@ export default async function RecipePage({ params }: { params: Params }) {
           </aside>
 
           <div className="max-w-[46rem] min-w-0">
-            <MethodSteps steps={recipe.steps} />
+            <div id="method" className="scroll-mt-[calc(var(--header-h)+4.5rem)]">
+              <MethodSteps steps={recipe.steps} />
+            </div>
 
             {recipe.notes && (
               <section className="mt-14 rounded-lg bg-paper-2 p-6 sm:p-8" aria-labelledby="notes-title">
@@ -203,7 +213,11 @@ export default async function RecipePage({ params }: { params: Params }) {
               )}
             </div>
 
-            <section className="mt-14 border-t border-line pt-10" aria-labelledby="nutrition-title">
+            <section
+              id="nutrition"
+              className="mt-14 scroll-mt-[calc(var(--header-h)+4.5rem)] border-t border-line pt-10"
+              aria-labelledby="nutrition-title"
+            >
               <div className="flex flex-wrap items-baseline justify-between gap-2">
                 <h2 id="nutrition-title" className="font-display text-[1.8rem] leading-none text-ink">
                   Nutrition per serving

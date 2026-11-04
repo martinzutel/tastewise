@@ -16,10 +16,10 @@ export function PageHeader({
   className?: string;
 }) {
   return (
-    <div className={cn("flex flex-wrap items-end justify-between gap-6 pt-10 pb-8 sm:pt-14 sm:pb-10", className)}>
+    <div className={cn("flex flex-wrap items-end justify-between gap-6 pt-7 pb-6 sm:pt-14 sm:pb-10", className)}>
       <div className="max-w-2xl">
         <h1 className="font-display text-headline text-ink">{title}</h1>
-        {description && <p className="mt-3 text-[1.02rem] text-ink-muted">{description}</p>}
+        {description && <p className="mt-2.5 text-[0.98rem] text-ink-muted sm:mt-3 sm:text-[1.02rem]">{description}</p>}
       </div>
       {actions && <div className="flex flex-wrap items-center gap-3">{actions}</div>}
     </div>

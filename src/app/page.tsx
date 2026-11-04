@@ -104,7 +104,7 @@ export default async function DiscoverPage() {
 
   return (
     <>
-      <Hero cover={cover} />
+      <Hero cover={cover} recipeCount={recipes.length} />
 
       <section className="mx-auto max-w-[1360px] px-5 sm:px-8" aria-labelledby="featured-title">
         <SectionHeading

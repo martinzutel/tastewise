@@ -12,7 +12,6 @@ Discovery, search and filters, recipe detail with scaling, pantry matching, save
 4. **Pantry quantity awareness**: today matching is by presence only. Use quantities where both sides have compatible units.
 5. **Collections** for saved recipes.
 6. **Recipe images in Supabase Storage** or an image CDN with stable URLs, instead of Unsplash hotlinks.
-7. Tablet toast placement (toasts can overlap the bottom tab bar between 600 and 1023 px wide).
 
 ## Later: AI phase (requires explicit approval)
 

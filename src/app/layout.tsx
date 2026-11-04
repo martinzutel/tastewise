@@ -41,7 +41,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   const sessionUser = user ? { id: user.id, email: user.email ?? null } : null;
 
   return (
-    <html lang="en" className={`${manrope.variable} ${cormorant.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${manrope.variable} ${cormorant.variable} scroll-smooth`}>
       <body>
         <a
           href="#main"

@@ -40,6 +40,8 @@ export function PantryClient({ recipes, ingredients }: { recipes: RecipeSummary[
   const { data, status, addPantryItems, removePantryItem, updatePantryItem, addToShoppingList } = useUserData();
   const [filter, setFilter] = useState<MatchFilter>("all");
   const [pantrySearch, setPantrySearch] = useState("");
+  // Phones show one panel at a time. Once you have ingredients, open on the recipes you can cook.
+  const [view, setView] = useState<"pantry" | "cook" | null>(null);
   const byId = useMemo(() => new Map(ingredients.map((i) => [i.id, i])), [ingredients]);
 
   const pantryIds = useMemo(() => new Set(data.pantry.map((p) => p.ingredientId)), [data.pantry]);
@@ -75,14 +77,52 @@ export function PantryClient({ recipes, ingredients }: { recipes: RecipeSummary[
     );
   };
 
+  const activeView = view ?? (data.pantry.length ? "cook" : "pantry");
+  const showView = (v: "pantry" | "cook") => {
+    setView(v);
+    window.scrollTo({ top: 0 });
+  };
+
   if (status === "loading") {
     return <div className="h-64 animate-pulse rounded-xl bg-paper-2" role="status" aria-label="Loading your pantry" />;
   }
 
   return (
-    <div className="grid gap-14 lg:grid-cols-[minmax(320px,420px)_1fr] lg:gap-16">
+    <div className="grid gap-8 lg:grid-cols-[minmax(320px,420px)_1fr] lg:gap-16">
+      {/* ------- phone panel switch ------- */}
+      <div
+        role="group"
+        aria-label="Show"
+        className="sticky top-[var(--header-h)] z-20 -mx-5 border-b border-line bg-paper/95 px-5 py-2.5 backdrop-blur-md sm:-mx-8 sm:px-8 lg:hidden"
+      >
+        <div className="grid grid-cols-2 rounded-md border border-line-strong bg-surface p-1">
+          {(
+            [
+              ["pantry", "Your ingredients", data.pantry.length],
+              ["cook", "What you can cook", matches.length],
+            ] as const
+          ).map(([v, label, count]) => (
+            <button
+              key={v}
+              type="button"
+              aria-pressed={activeView === v}
+              onClick={() => showView(v)}
+              className={cn(
+                "flex h-10 items-center justify-center gap-1.5 rounded-sm text-[0.88rem] font-medium transition-colors",
+                activeView === v ? "bg-ink text-paper" : "text-ink-muted",
+              )}
+            >
+              {label}
+              <span className={cn("text-xs tabular-nums", activeView === v ? "text-paper/70" : "text-ink-faint")}>
+                {count}
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+
       {/* ------- the pantry ------- */}
-      <section aria-labelledby="pantry-title">
+      <section aria-labelledby="pantry-title" className={cn(activeView !== "pantry" && "max-lg:hidden")}>
         <h2 id="pantry-title" className="sr-only">
           Your ingredients
         </h2>
@@ -97,7 +137,7 @@ export function PantryClient({ recipes, ingredients }: { recipes: RecipeSummary[
                   key={i.id}
                   type="button"
                   onClick={() => addPantryItems([i])}
-                  className="inline-flex h-8 items-center gap-1 rounded-md border border-line px-2.5 text-[0.82rem] text-ink transition-colors hover:border-line-strong hover:bg-paper-2"
+                  className="inline-flex h-10 items-center gap-1 rounded-md border border-line px-3 text-[0.85rem] text-ink transition-colors hover:border-line-strong hover:bg-paper-2 sm:h-8 sm:px-2.5 sm:text-[0.82rem]"
                 >
                   <PlusIcon className="size-3.5 text-ink-muted" aria-hidden />
                   <span className="inline-block first-letter:uppercase">{i.plural ?? i.name}</span>
@@ -127,7 +167,7 @@ export function PantryClient({ recipes, ingredients }: { recipes: RecipeSummary[
                   onChange={(e) => setPantrySearch(e.target.value)}
                   placeholder="Find in pantry"
                   aria-label="Find an ingredient in your pantry"
-                  className="h-9 w-40 rounded-md border border-line bg-surface px-3 text-sm outline-none focus:border-sage"
+                  className="h-10 w-36 rounded-md border border-line bg-surface px-3 text-sm outline-none focus:border-sage sm:h-9 sm:w-40"
                 />
               )}
             </div>
@@ -151,12 +191,17 @@ export function PantryClient({ recipes, ingredients }: { recipes: RecipeSummary[
                 </ul>
               </div>
             ))}
+            {matches.length > 0 && (
+              <Button className="mt-8 h-12 w-full lg:hidden" onClick={() => showView("cook")}>
+                See {matches.length} {matches.length === 1 ? "recipe" : "recipes"} you can cook
+              </Button>
+            )}
           </div>
         )}
       </section>
 
       {/* ------- matching recipes ------- */}
-      <section aria-labelledby="matches-title" className="min-w-0">
+      <section aria-labelledby="matches-title" className={cn("min-w-0", activeView !== "cook" && "max-lg:hidden")}>
         <h2 id="matches-title" className="font-display text-title text-ink">
           What you can cook
         </h2>
@@ -164,7 +209,7 @@ export function PantryClient({ recipes, ingredients }: { recipes: RecipeSummary[
           Matched against required ingredients. Salt, pepper, water and optional extras are assumed.
         </p>
 
-        <div role="group" aria-label="Filter matches" className="mt-6 flex gap-1 overflow-x-auto border-b border-line">
+        <div role="group" aria-label="Filter matches" className="mt-5 flex flex-wrap gap-2">
           {FILTERS.map((f) => (
             <button
               key={f.value}
@@ -172,21 +217,27 @@ export function PantryClient({ recipes, ingredients }: { recipes: RecipeSummary[
               aria-pressed={filter === f.value}
               onClick={() => setFilter(f.value)}
               className={cn(
-                "relative h-11 shrink-0 px-3 text-sm whitespace-nowrap transition-colors",
-                filter === f.value ? "font-medium text-ink" : "text-ink-muted hover:text-ink",
+                "inline-flex h-10 items-center gap-1.5 rounded-md border px-3 text-sm whitespace-nowrap transition-colors sm:h-9",
+                filter === f.value
+                  ? "border-sage bg-sage-wash font-medium text-sage-ink"
+                  : "border-line-strong text-ink hover:bg-paper-2",
               )}
             >
               {f.label}
-              <span className="ml-1.5 text-xs text-ink-faint tabular-nums">{counts[f.value]}</span>
-              {filter === f.value && <span className="absolute inset-x-3 -bottom-px h-[2px] bg-sage" aria-hidden />}
+              <span className="text-xs tabular-nums opacity-70">{counts[f.value]}</span>
             </button>
           ))}
         </div>
 
         {data.pantry.length === 0 ? (
-          <p className="mt-10 text-[0.95rem] text-ink-muted">
-            Add a few ingredients and matching recipes will appear here, ranked by how little you’re missing.
-          </p>
+          <div className="mt-10">
+            <p className="text-[0.95rem] text-ink-muted">
+              Add a few ingredients and matching recipes will appear here, ranked by how much you already have.
+            </p>
+            <Button className="mt-5 lg:hidden" onClick={() => showView("pantry")}>
+              Add ingredients
+            </Button>
+          </div>
         ) : visible.length === 0 ? (
           <div className="mt-10 rounded-lg bg-paper-2 p-6 text-[0.95rem] text-ink-muted">
             {filter === "complete"
@@ -198,14 +249,14 @@ export function PantryClient({ recipes, ingredients }: { recipes: RecipeSummary[
             {visible.map((m) => (
               <li
                 key={m.recipe.id}
-                className="group relative grid grid-cols-[88px_1fr] gap-5 py-6 sm:grid-cols-[120px_1fr]"
+                className="group relative grid grid-cols-[76px_1fr] gap-4 py-5 sm:grid-cols-[120px_1fr] sm:gap-5 sm:py-6"
               >
                 <div className="relative aspect-square overflow-hidden rounded-md bg-paper-3">
                   <Image src={m.recipe.imageUrl} alt={m.recipe.imageAlt} fill sizes="120px" className="object-cover" />
                 </div>
                 <div className="min-w-0">
                   <div className="flex items-baseline justify-between gap-4">
-                    <h3 className="font-display text-[1.5rem] leading-[1.1] text-ink">
+                    <h3 className="font-display text-[1.3rem] leading-[1.1] text-ink sm:text-[1.5rem]">
                       <Link href={`/recipes/${m.recipe.slug}`} className="hover:text-sage-ink">
                         {m.recipe.title}
                       </Link>
@@ -296,7 +347,7 @@ function PantryRow({
         onKeyDown={(e) => e.key === "Enter" && (e.currentTarget as HTMLInputElement).blur()}
         placeholder="Qty"
         aria-label={`Quantity of ${item.name}`}
-        className="h-9 w-14 rounded-sm border border-transparent bg-transparent px-2 text-right text-sm tabular-nums transition-colors outline-none placeholder:text-ink-faint hover:border-line focus:border-sage focus:bg-surface"
+        className="h-10 w-14 rounded-sm border border-transparent bg-transparent px-2 text-right text-sm tabular-nums transition-colors outline-none placeholder:text-ink-faint hover:border-line focus:border-sage focus:bg-surface sm:h-9"
       />
       <input
         value={unit}
@@ -305,11 +356,11 @@ function PantryRow({
         onKeyDown={(e) => e.key === "Enter" && (e.currentTarget as HTMLInputElement).blur()}
         placeholder="unit"
         aria-label={`Unit for ${item.name}`}
-        className="h-9 w-14 rounded-sm border border-transparent bg-transparent px-2 text-sm transition-colors outline-none placeholder:text-ink-faint hover:border-line focus:border-sage focus:bg-surface"
+        className="h-10 w-14 rounded-sm border border-transparent bg-transparent px-2 text-sm transition-colors outline-none placeholder:text-ink-faint hover:border-line focus:border-sage focus:bg-surface sm:h-9"
       />
       <Button
         variant="ghost"
-        size="icon-sm"
+        size="icon"
         onClick={onRemove}
         aria-label={`Remove ${item.name}`}
         className="text-ink-faint hover:text-ink"

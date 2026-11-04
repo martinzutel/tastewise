@@ -189,7 +189,7 @@ function ShoppingRow({
         role="checkbox"
         aria-checked={item.completed}
         onClick={onToggle}
-        className="flex min-h-14 flex-1 items-center gap-4 rounded-md px-1 text-left"
+        className="flex min-h-14 min-w-0 flex-1 items-center gap-4 rounded-md px-1 text-left"
       >
         <span
           aria-hidden
@@ -202,10 +202,10 @@ function ShoppingRow({
         >
           {item.completed && <CheckIcon className="size-3.5" strokeWidth={3} />}
         </span>
-        <span className="min-w-0">
+        <span className="min-w-0 flex-1">
           <span
             className={cn(
-              "block text-[1rem] text-ink transition-colors first-letter:uppercase",
+              "block truncate text-[1rem] text-ink transition-colors first-letter:uppercase",
               item.completed && "text-ink-faint line-through decoration-ink-faint/50",
             )}
           >
@@ -242,7 +242,7 @@ function ShoppingRow({
             setEditing(true);
           }}
           className={cn(
-            "h-9 shrink-0 rounded-sm px-2 text-sm tabular-nums transition-colors hover:bg-paper-2",
+            "h-11 shrink-0 rounded-sm px-2 text-sm whitespace-nowrap tabular-nums transition-colors hover:bg-paper-2 sm:h-9",
             amount ? "text-ink-muted" : "text-ink-faint",
             item.completed && "opacity-50",
           )}
@@ -254,7 +254,7 @@ function ShoppingRow({
 
       <Button
         variant="ghost"
-        size="icon-sm"
+        size="icon"
         onClick={onRemove}
         aria-label={`Remove ${item.name}`}
         className="text-ink-faint hover:text-ink"
