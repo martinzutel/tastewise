@@ -15,7 +15,9 @@ export function MobileNav() {
   return (
     <nav
       aria-label="Main"
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-paper/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md lg:hidden"
+      // iOS Safari's floating address bar leaves a strip below bottom:0 where the page keeps scrolling;
+      // the solid ::after extends the bar's background down to the physical screen edge.
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-paper pb-[env(safe-area-inset-bottom)] after:pointer-events-none after:absolute after:inset-x-0 after:top-full after:h-[200px] after:bg-paper lg:hidden"
     >
       <ul className="mx-auto grid max-w-lg grid-cols-5">
         {NAV_ITEMS.map((item) => {

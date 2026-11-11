@@ -3,3 +3,5 @@ node_modules
 supabase/seed.sql
 package-lock.json
 .vercel
+# Slide HTML is hand-authored in the Slides format; reformatting breaks it.
+src/content/deck/*.html

@@ -16,6 +16,7 @@ export const SLIDE_ORDER = [
   "why",
   "problem",
   "product",
+  "ideas",
   "today",
   "direction",
   "questions",
@@ -30,9 +31,10 @@ export const SLIDE_ORDER = [
 ] as const;
 
 // Slides name the brand fonts directly; the site loads them through next/font, which exposes CSS variables.
+// Matches 'Name', "Name" or &quot;Name&quot; so a reformatted file can't silently fall back to system fonts.
 const FONT_SWAPS: [RegExp, string][] = [
-  [/'Cormorant Garamond'/g, "var(--font-cormorant)"],
-  [/'Manrope'/g, "var(--font-manrope)"],
+  [/(?:'|"|&quot;)Cormorant Garamond(?:'|"|&quot;)/g, "var(--font-cormorant)"],
+  [/(?:'|"|&quot;)Manrope(?:'|"|&quot;)/g, "var(--font-manrope)"],
 ];
 
 export function loadSlides(): { id: string; html: string }[] {

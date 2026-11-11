@@ -63,6 +63,24 @@ To reset your demo data, clear the site's storage in your browser's dev tools (t
 
 ---
 
+## The stack in plain words
+
+Nothing exotic. If you've built a modern web app before, you'll recognise all of it.
+
+| Tool             | What it is                            | What we use it for                                                                                                         |
+| ---------------- | ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| **Next.js**      | The web framework (built on React)    | Pages and routing: every folder in `src/app/` is a URL. Also runs the small bits of server code.                           |
+| **React**        | The UI library                        | Everything on screen is a component in `src/components/`.                                                                  |
+| **TypeScript**   | JavaScript with types                 | Catches mistakes before the code runs. The data shapes live in `src/lib/types.ts`.                                         |
+| **Tailwind CSS** | Styling with class names              | `className="text-ink bg-paper"` instead of separate CSS files. Colors and fonts are defined once in `src/app/globals.css`. |
+| **shadcn/ui**    | Copy-in UI building blocks (on Radix) | Dialogs, dropdowns and selects that are accessible by default. They live in `src/components/ui/` and are ours to edit.     |
+| **Zod**          | Data checking                         | Validates anything from outside: forms, URL filters, saved data.                                                           |
+| **Supabase**     | Database and login (optional)         | Off by default. Without it, recipes come from files in the repo and your saved stuff lives in the browser.                 |
+| **Vercel**       | Hosting                               | `npx vercel deploy --prod` puts the site live at tastewise-two.vercel.app.                                                 |
+| **lucide-react** | Icons                                 | One consistent icon set.                                                                                                   |
+
+That's the whole list. No separate backend server, no state-management library, no CSS framework beyond Tailwind.
+
 ## 3. The mental model
 
 The app has two kinds of data, and they travel in opposite directions.

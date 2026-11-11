@@ -8,6 +8,10 @@ This is the MVP foundation. It deliberately contains **no AI features**; see [do
 
 **New to the code? Read [docs/GUIDE.md](docs/GUIDE.md) first.** It covers the mental model, where everything lives and how to make common changes.
 
+## Stack
+
+Next.js (React + TypeScript), Tailwind CSS, shadcn/ui, Zod, optional Supabase, hosted on Vercel. Each one is explained in plain words in [docs/GUIDE.md](docs/GUIDE.md#the-stack-in-plain-words).
+
 ## Quick start
 
 ```bash

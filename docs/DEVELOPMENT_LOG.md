@@ -87,3 +87,17 @@
 **Bottom bar gap on iPhones.** The viewport lacked `viewport-fit=cover`, so `env(safe-area-inset-bottom)` was always 0 and iOS left an unpainted strip below the tab bar. With `cover`, the bar reaches the edge and pads for the home indicator. The footer, the sticky preferences bar and the mobile toast offset now add the safe area instead of fixed values, and body padding keeps content clear of the notch in landscape.
 
 **Link previews.** Built with `next/og` (no new dependency). The cards use the real fonts (Cormorant Garamond and Manrope, loaded from Google Fonts as TTF subsets) and the recipe photography. `metadataBase` comes from Vercel's `VERCEL_PROJECT_PRODUCTION_URL`, so image URLs are absolute, which chat apps require. The recipe page no longer overrides `og:image` with the raw photo, so the designed card wins.
+
+## 2026-11-11: Deck polish, iPhone bar, stack doc
+
+**Deck.**
+
+- Added "The three ideas at the heart of Tastewise": pantry and missing items (built) next to the fridge and pantry scan (next idea, not built).
+- Made the status honest: the 33 recipes are placeholders, and finding real ones is an open question.
+- Rewrote the pantry-first question in plain words.
+- Rebalanced slides that had empty areas: the question slides now space heading, cards and footer evenly.
+- The slide HTML is excluded from Prettier. A reformat had escaped the font names, so the /deck page silently fell back to system fonts; the loader now matches any quote style.
+
+**iPhone bottom bar.** iOS Safari's floating address bar leaves a strip below `bottom: 0` where the page keeps scrolling. The tab bar now has a solid `::after` that extends its background 200 px below its own edge.
+
+**Docs.** Added "The stack in plain words" to `docs/GUIDE.md`.
