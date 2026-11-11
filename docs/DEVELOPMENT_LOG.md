@@ -44,7 +44,7 @@
 
 **PRODUCT.md.** Primary users are beginner cooks, phone first, and the positioning is "cook from your pantry". Future design work starts there.
 
-**Discover follows the positioning.** The four-cell feature strip became the core loop in order (pantry → matches → shopping → cooking), numbered because it is a real sequence, with live progress.
+**Discover strip stays as icons.** A numbered "pantry-first loop" version was tried during polish and reverted at the owner's request: the four icon entry points (matching the tab bar icons), without numbers, are the preferred design.
 
 **Polish.**
 
