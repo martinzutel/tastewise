@@ -213,3 +213,62 @@
     scroll-snap-align: start;
   }
 }
+
+/* ---------------------------------------------------------------------------
+ * Shared deck (/deck). Slides are 1920×1080 sections with inline styles from
+ * the Slides format; these rules restore what Tailwind's reset removes.
+ * ------------------------------------------------------------------------- */
+.deck-slide > section {
+  position: relative;
+  box-sizing: border-box;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+}
+.deck-slide ul {
+  list-style: disc;
+  padding-left: 1.1em;
+}
+.deck-slide li + li {
+  margin-top: 0.35em;
+}
+.deck-slide li::marker {
+  color: var(--sage);
+}
+.deck-slide aside {
+  display: none;
+}
+
+@media print {
+  @page {
+    size: 1920px 1080px;
+    margin: 0;
+  }
+  html,
+  body,
+  .deck-page {
+    background: #ffffff !important;
+    padding: 0 !important;
+  }
+  .deck-chrome {
+    display: none !important;
+  }
+  .deck-page main {
+    max-width: none;
+    padding: 0;
+  }
+  .deck-slides {
+    gap: 0 !important;
+  }
+  .deck-frame {
+    width: 1920px;
+    height: 1080px;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    break-after: page;
+  }
+  .deck-slide {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}

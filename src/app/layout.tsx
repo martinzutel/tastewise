@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Manrope } from "next/font/google";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { SiteFooter } from "@/components/layout/site-footer";
+import { HideOnDeck } from "@/components/layout/hide-on-deck";
 import { SiteHeader } from "@/components/layout/site-header";
 import { StorageErrorBanner } from "@/components/layout/storage-error-banner";
 import { Toaster } from "@/components/ui/sonner";
@@ -71,13 +72,17 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
           Skip to content
         </a>
         <UserDataProvider user={sessionUser}>
-          <SiteHeader authEnabled={isSupabaseConfigured} />
-          <StorageErrorBanner />
+          <HideOnDeck>
+            <SiteHeader authEnabled={isSupabaseConfigured} />
+            <StorageErrorBanner />
+          </HideOnDeck>
           <main id="main" className="min-h-[70vh]">
             {children}
           </main>
-          <SiteFooter />
-          <MobileNav />
+          <HideOnDeck>
+            <SiteFooter />
+            <MobileNav />
+          </HideOnDeck>
           <Toaster
             position="bottom-center"
             offset={{ bottom: 32 }}

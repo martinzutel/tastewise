@@ -76,6 +76,7 @@ Status: **Implemented** = works end to end in demo mode (and is wired to Supabas
 
 - **Link previews**: shared links show a designed card. The site card pairs the headline with the cover photo (`src/app/opengraph-image.tsx`). Each recipe gets its own card with its photo, title, description, time, difficulty and cuisine (`src/app/recipes/[slug]/opengraph-image.tsx`). All are generated at build time.
 - iPhone safe areas: the page uses `viewport-fit=cover`, so the bottom tab bar reaches the screen edge with padding for the home indicator. The footer, the sticky preferences bar and toasts all clear it.
+- **Shared deck** at `/deck`: the "where we are" presentation as a standalone page (no app header or tab bar), with its own preview card, excluded from search engines, and a "Save as PDF" button that prints one slide per landscape page. Slides are plain HTML files in `src/content/deck/`.
 - Header search dialog (⌘K / Ctrl+K) backed by `/api/recipes`.
 - Toasts for saves, list changes, and errors. Optimistic updates roll back on failure.
 - If saved data can't be loaded, a banner says so (nothing was deleted) with a "Try again" button, so empty screens aren't mistaken for lost data.

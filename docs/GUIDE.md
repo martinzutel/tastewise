@@ -147,6 +147,7 @@ scripts/generate-seed-sql.ts  The generator
 | Form validation messages                     | `src/lib/validation/schemas.ts`                                                                                          |
 | Toast messages for saves and list changes    | `src/lib/user-data/provider.tsx`                                                                                         |
 | The preview card shown when a link is shared | `src/app/opengraph-image.tsx` (site), `src/app/recipes/[slug]/opengraph-image.tsx` (recipes), helpers in `src/lib/og.ts` |
+| The shared deck at `/deck`                   | One HTML file per slide in `src/content/deck/`; order and title in `src/content/deck/index.ts`                           |
 
 ---
 
