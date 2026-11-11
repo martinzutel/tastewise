@@ -22,10 +22,7 @@ export function RecentList({ recipes }: { recipes: RecipeSummary[] }) {
               />
             </div>
             <div className="min-w-0 py-1">
-              <p className="text-[0.8rem] text-ink-muted">
-                Added <time dateTime={r.createdAt}>{dateFmt.format(new Date(r.createdAt))}</time>
-              </p>
-              <h3 className="font-display mt-1 text-[1.5rem] leading-[1.1] text-ink">
+              <h3 className="font-display text-[1.5rem] leading-[1.1] text-ink">
                 <Link
                   href={`/recipes/${r.slug}`}
                   className="decoration-sage underline-offset-4 outline-none after:absolute after:inset-0 focus-visible:underline"
@@ -35,6 +32,9 @@ export function RecentList({ recipes }: { recipes: RecipeSummary[] }) {
               </h3>
               <p className="mt-1.5 line-clamp-2 text-[0.9rem] text-ink-muted">{r.description}</p>
               <RecipeMeta className="mt-2.5" totalTime={r.totalTime} difficulty={r.difficulty} />
+              <p className="mt-1.5 text-[0.78rem] text-ink-muted">
+                Added <time dateTime={r.createdAt}>{dateFmt.format(new Date(r.createdAt))}</time>
+              </p>
             </div>
           </article>
         </li>

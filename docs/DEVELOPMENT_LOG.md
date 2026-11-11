@@ -39,3 +39,21 @@
 **Bugs fixed.** The shopping list scrolled sideways at 375 px (157 px overflow) because a long "For …" line couldn't shrink. Rows now truncate. The new hero briefly overflowed because a scrolling grid child expanded its `auto` column; columns are now `minmax(0, 1fr)`.
 
 **Touch and input.** Phone touch targets are 40–48 px. Form text is 16 px below 640 px so iOS Safari doesn't zoom on focus. Toasts clear the tab bar at all widths below 1024 px.
+
+## 2026-11-11: Product record and polish
+
+**PRODUCT.md.** Primary users are beginner cooks, phone first, and the positioning is "cook from your pantry". Future design work starts there.
+
+**Discover follows the positioning.** The four-cell feature strip became the core loop in order (pantry → matches → shopping → cooking), numbered because it is a real sequence, with live progress.
+
+**Polish.**
+
+- Tips and substitutions dropped their coloured left rules for hairline lists.
+- "Added" dates moved below recent-recipe titles instead of sitting above them like a label.
+- The display size is capped at 6rem.
+- Caret, accent, scrollbar and underline offset are themed.
+- The account storage notice keeps its icon inline on phones.
+- The Explore filter button always shows its label.
+- The recipe jump bar uses a scroll-spy, so it highlights the right section in areas between anchors.
+
+**Ops note.** Running `next build` (or a deploy that builds locally) while `next dev` is running corrupts the dev server's `.next` cache and every page returns 500. Stop the dev server first, or delete `.next` and restart.

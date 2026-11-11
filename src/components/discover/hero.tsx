@@ -14,11 +14,11 @@ const SUGGESTIONS = [
 ];
 
 /**
- * Order on phones: promise and search, then the four things the app does,
+ * Order on phones: promise and search, then how the app works (pantry first),
  * then the cover photo. On desktop the photo sits beside the promise and
  * the four jobs run full width underneath.
  */
-export function Hero({ cover, recipeCount }: { cover: RecipeSummary; recipeCount: number }) {
+export function Hero({ cover, recipes }: { cover: RecipeSummary; recipes: RecipeSummary[] }) {
   return (
     <section className="mx-auto grid max-w-[1360px] grid-cols-[minmax(0,1fr)] gap-8 px-5 pt-7 pb-14 sm:px-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-center lg:gap-x-16 lg:gap-y-14 lg:pt-14 lg:pb-20">
       <div className="max-w-[40rem] min-w-0">
@@ -95,7 +95,7 @@ export function Hero({ cover, recipeCount }: { cover: RecipeSummary; recipeCount
       </figure>
 
       <div className="order-2 -mx-5 sm:mx-0 lg:order-none lg:col-span-2">
-        <WhatYouCanDo recipeCount={recipeCount} />
+        <WhatYouCanDo recipes={recipes} />
       </div>
     </section>
   );

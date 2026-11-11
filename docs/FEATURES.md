@@ -5,7 +5,7 @@ Status: **Implemented** = works end to end in demo mode (and is wired to Supabas
 ## Discover (`/`): Implemented
 
 - Editorial hero with a search form (submits to Explore) and quick suggestion links (one scrollable row on phones).
-- **What you can do**: four entry points (find a recipe, cook from your pantry, keep a cookbook, shop with one list) using the same icons as the navigation. Each shows live status once you have data ("7 ingredients in your pantry", "14 items to buy"). On phones it sits directly under the search, before the cover photo.
+- **How it works**: the pantry-first loop as four numbered steps (add what you have, see what you can cook, shop for what's missing, cook step by step). Each step shows live progress once you have data ("8 ingredients so far", "27 recipes use what you have"). On phones it sits directly under the search, before the cover photo.
 - Featured spread: one lead recipe and two supporting ones (`featured` flag).
 - **Matched to your preferences**: only shown once preferences are set. Rule-based, and each card shows why it matched.
 - Popular right now: top five by popularity, ranked.

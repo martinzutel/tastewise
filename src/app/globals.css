@@ -99,7 +99,7 @@
   --radius-2xl: 14px;
 
   /* Type scale (1.25 ratio, 16px base) */
-  --text-display: clamp(3.1rem, 2rem + 4.6vw, 6.4rem);
+  --text-display: clamp(3.1rem, 2rem + 4.4vw, 6rem);
   --text-display--line-height: 0.94;
   --text-display--letter-spacing: -0.015em;
   --text-headline: clamp(2.3rem, 1.7rem + 2.4vw, 3.8rem);
@@ -150,6 +150,15 @@
     textarea {
       font-size: 16px !important;
     }
+  }
+  html {
+    caret-color: var(--sage-ink);
+    accent-color: var(--sage);
+    scrollbar-color: var(--line-strong) transparent;
+  }
+  a {
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 1px;
   }
   ::selection {
     background: var(--sage-wash);

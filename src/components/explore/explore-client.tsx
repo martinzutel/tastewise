@@ -161,7 +161,7 @@ export function ExploreClient({
               <SheetTrigger asChild>
                 <Button variant="outline" className="h-12 bg-surface px-3.5 lg:hidden" aria-label="Filters and sorting">
                   <SlidersHorizontalIcon aria-hidden />
-                  <span className="hidden min-[400px]:inline">Filters</span>
+                  <span>Filters</span>
                   {activeCount > 0 && (
                     <span className="rounded-sm bg-sage-ink px-1.5 text-xs font-semibold text-white">
                       {activeCount}

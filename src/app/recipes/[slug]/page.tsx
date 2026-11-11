@@ -183,9 +183,9 @@ export default async function RecipePage({ params }: { params: Params }) {
                     <LightbulbIcon className="size-5 text-clay" strokeWidth={1.6} aria-hidden />
                     Tips
                   </h2>
-                  <ul className="mt-5 space-y-4">
+                  <ul className="mt-4 divide-y divide-line border-y border-line">
                     {recipe.tips.map((t) => (
-                      <li key={t} className="border-l-2 border-clay/40 pl-4 text-[0.95rem] leading-relaxed text-ink">
+                      <li key={t} className="py-3.5 text-[0.95rem] leading-relaxed text-ink">
                         {t}
                       </li>
                     ))}
@@ -201,9 +201,9 @@ export default async function RecipePage({ params }: { params: Params }) {
                     <RefreshCwIcon className="size-5 text-sage" strokeWidth={1.6} aria-hidden />
                     Substitutions
                   </h2>
-                  <dl className="mt-5 space-y-4">
+                  <dl className="mt-4 divide-y divide-line border-y border-line">
                     {recipe.substitutions.map((s) => (
-                      <div key={s.ingredient} className="border-l-2 border-sage/40 pl-4">
+                      <div key={s.ingredient} className="py-3.5">
                         <dt className="text-[0.82rem] font-semibold text-ink">Instead of {s.ingredient}</dt>
                         <dd className="mt-0.5 text-[0.95rem] leading-relaxed text-ink">{s.substitute}</dd>
                       </div>
