@@ -132,20 +132,21 @@ scripts/generate-seed-sql.ts  The generator
 
 ### "Where do I change…?"
 
-| I want to change…                         | Go to                                                           |
-| ----------------------------------------- | --------------------------------------------------------------- |
-| A color, font size or radius              | `src/app/globals.css` (tokens at the top)                       |
-| Navigation items or their icons           | `src/components/layout/nav-items.ts`                            |
-| Homepage sections                         | `src/app/page.tsx` and `src/components/discover/`               |
-| How recipe cards look everywhere          | `src/components/recipe/recipe-card.tsx`                         |
-| Filter options or their labels            | `src/lib/types.ts` (values) and `src/lib/constants.ts` (labels) |
-| How search ranks results                  | `src/lib/services/recipe-search.ts`                             |
-| How pantry matching works                 | `src/lib/services/pantry-matching.ts`                           |
-| How shopping items merge                  | `src/lib/services/shopping-list.ts` and `src/lib/units.ts`      |
-| How quantities are displayed              | `src/lib/format.ts`                                             |
-| A recipe, its photo or ingredients        | `src/data/seed/recipes.ts`                                      |
-| Form validation messages                  | `src/lib/validation/schemas.ts`                                 |
-| Toast messages for saves and list changes | `src/lib/user-data/provider.tsx`                                |
+| I want to change…                            | Go to                                                                                                                    |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| A color, font size or radius                 | `src/app/globals.css` (tokens at the top)                                                                                |
+| Navigation items or their icons              | `src/components/layout/nav-items.ts`                                                                                     |
+| Homepage sections                            | `src/app/page.tsx` and `src/components/discover/`                                                                        |
+| How recipe cards look everywhere             | `src/components/recipe/recipe-card.tsx`                                                                                  |
+| Filter options or their labels               | `src/lib/types.ts` (values) and `src/lib/constants.ts` (labels)                                                          |
+| How search ranks results                     | `src/lib/services/recipe-search.ts`                                                                                      |
+| How pantry matching works                    | `src/lib/services/pantry-matching.ts`                                                                                    |
+| How shopping items merge                     | `src/lib/services/shopping-list.ts` and `src/lib/units.ts`                                                               |
+| How quantities are displayed                 | `src/lib/format.ts`                                                                                                      |
+| A recipe, its photo or ingredients           | `src/data/seed/recipes.ts`                                                                                               |
+| Form validation messages                     | `src/lib/validation/schemas.ts`                                                                                          |
+| Toast messages for saves and list changes    | `src/lib/user-data/provider.tsx`                                                                                         |
+| The preview card shown when a link is shared | `src/app/opengraph-image.tsx` (site), `src/app/recipes/[slug]/opengraph-image.tsx` (recipes), helpers in `src/lib/og.ts` |
 
 ---
 
@@ -256,6 +257,7 @@ Then click through what you changed at phone width (375 px) and at desktop width
 | ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
 | Every page returns 500 with `ENOENT … _buildManifest.js.tmp` | A build ran while the dev server was running. Stop it, `rm -rf .next`, start again.                                               |
 | `Recipe "x" references unknown ingredient "y"`               | Add `y` to `src/data/seed/ingredients.ts`, or fix the typo in the recipe.                                                         |
+| A shared link shows no preview                               | Chat apps cache previews. Check that `https://<site>/opengraph-image` loads, then re-share or use the platform's link debugger.   |
 | A recipe image is grey or blank                              | Check the Unsplash id opens at `https://images.unsplash.com/photo-<id>?w=400`. New image hosts must be added to `next.config.ts`. |
 | "Your saved recipes… couldn't be loaded" banner              | Stored data couldn't be read. In demo mode, clear the site's storage; with Supabase, check the network tab.                       |
 | Saved items vanished after switching browsers                | Expected in demo mode: data lives in each browser. Sign-in with Supabase syncs it.                                                |

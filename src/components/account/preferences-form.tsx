@@ -228,7 +228,7 @@ export function PreferencesForm({ ingredients }: { ingredients: Ingredient[] }) 
         </div>
       </Section>
 
-      <div className="sticky bottom-20 z-20 flex items-center justify-between gap-4 border-t border-line bg-paper/95 py-4 backdrop-blur lg:bottom-0">
+      <div className="sticky bottom-[calc(4rem+env(safe-area-inset-bottom))] z-20 flex items-center justify-between gap-4 border-t border-line bg-paper/95 py-4 backdrop-blur lg:bottom-0">
         <p className="text-sm text-ink-muted">
           {isDirty ? "You have unsaved changes." : "Preferences are up to date."}
         </p>

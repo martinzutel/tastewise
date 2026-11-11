@@ -81,3 +81,9 @@
 **Missing state fixed.** The user-data provider had an error status and a `retry` function that nothing used. A storage error banner now uses them.
 
 **Docs.** Added `docs/GUIDE.md` (onboarding for new developers) and the `npm run check` and `npm run unused` scripts.
+
+## 2026-11-11: Bottom bar and link previews
+
+**Bottom bar gap on iPhones.** The viewport lacked `viewport-fit=cover`, so `env(safe-area-inset-bottom)` was always 0 and iOS left an unpainted strip below the tab bar. With `cover`, the bar reaches the edge and pads for the home indicator. The footer, the sticky preferences bar and the mobile toast offset now add the safe area instead of fixed values, and body padding keeps content clear of the notch in landscape.
+
+**Link previews.** Built with `next/og` (no new dependency). The cards use the real fonts (Cormorant Garamond and Manrope, loaded from Google Fonts as TTF subsets) and the recipe photography. `metadataBase` comes from Vercel's `VERCEL_PROJECT_PRODUCTION_URL`, so image URLs are absolute, which chat apps require. The recipe page no longer overrides `og:image` with the raw photo, so the designed card wins.

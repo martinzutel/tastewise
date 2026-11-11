@@ -74,6 +74,8 @@ Status: **Implemented** = works end to end in demo mode (and is wired to Supabas
 
 ## Cross-cutting
 
+- **Link previews**: shared links show a designed card. The site card pairs the headline with the cover photo (`src/app/opengraph-image.tsx`). Each recipe gets its own card with its photo, title, description, time, difficulty and cuisine (`src/app/recipes/[slug]/opengraph-image.tsx`). All are generated at build time.
+- iPhone safe areas: the page uses `viewport-fit=cover`, so the bottom tab bar reaches the screen edge with padding for the home indicator. The footer, the sticky preferences bar and toasts all clear it.
 - Header search dialog (⌘K / Ctrl+K) backed by `/api/recipes`.
 - Toasts for saves, list changes, and errors. Optimistic updates roll back on failure.
 - If saved data can't be loaded, a banner says so (nothing was deleted) with a "Try again" button, so empty screens aren't mistaken for lost data.
