@@ -4,6 +4,10 @@ A recipe discovery and personal cooking companion: find something to cook, cook 
 
 This is the MVP foundation. It deliberately contains **no AI features**; see [docs/ROADMAP.md](docs/ROADMAP.md) for what comes next.
 
+**Live:** https://tastewise-two.vercel.app
+
+**New to the code? Read [docs/GUIDE.md](docs/GUIDE.md) first.** It covers the mental model, where everything lives and how to make common changes.
+
 ## Quick start
 
 ```bash
@@ -51,6 +55,8 @@ Never put the `service_role` key in the app.
 | Command                       | What it does                                                 |
 | ----------------------------- | ------------------------------------------------------------ |
 | `npm run dev`                 | Start the dev server                                         |
+| `npm run check`               | Type check, lint and formatting check (run before pushing)   |
+| `npm run unused`              | Find unused files, exports and dependencies (knip)           |
 | `npm run build` / `npm start` | Production build and server                                  |
 | `npm run lint`                | ESLint                                                       |
 | `npm run typecheck`           | TypeScript, strict mode                                      |
@@ -60,38 +66,15 @@ Never put the `service_role` key in the app.
 ## Project structure
 
 ```
-src/
-  app/                     routes (App Router), route handlers, server actions
-    page.tsx               Discover
-    recipes/               Explore (search + filters) and recipe detail [slug]
-    pantry/ saved/ shopping-list/ account/ sign-in/
-    api/recipes, api/ingredients   JSON route handlers
-    auth/callback          Supabase email confirmation
-  components/
-    ui/                    shadcn/ui primitives (themed)
-    layout/                header, mobile tab bar, search dialog, account menu
-    recipe/                recipe card, favorite button, meta, skeletons
-    recipe-detail/         ingredients + servings, method steps, actions
-    discover/ explore/ pantry/ saved/ shopping/ account/
-    common/                page header, empty state, avatar
-  lib/
-    types.ts               domain types (storage-agnostic)
-    constants.ts           labels, filter options, category mapping
-    format.ts, units.ts    quantity formatting, fractions, unit conversion
-    services/              pure business logic: search, pantry matching,
-                           shopping-list merging, personalization, diets, related
-    data/                  server-side catalogue repository + sources (seed, Supabase)
-    user-data/             personal-data repository (localStorage, Supabase) + React provider
-    supabase/              client, server and config helpers
-    validation/            Zod schemas
-  data/seed/               ingredients, recipes, hydration
-  middleware.ts            Supabase session refresh (no-op in demo mode)
-supabase/
-  migrations/              schema, RLS, search function, storage policies
-  seed.sql                 generated catalogue data
-scripts/generate-seed-sql.ts
-docs/                      architecture, database, features, roadmap, log
+src/app/            routes: Discover, Explore, recipe detail, pantry, saved, shopping list, account
+src/components/     UI grouped by screen (plus ui/ primitives, common/, layout/, recipe/)
+src/lib/            types, business logic (services/), catalogue access (data/), personal data (user-data/)
+src/data/seed/      the 33 recipes and 148 ingredients
+supabase/           schema migration and generated seed SQL
+docs/               guide, architecture, database, features, roadmap, development log
 ```
+
+A file-by-file map and a "where do I change…?" table are in [docs/GUIDE.md](docs/GUIDE.md#4-where-things-live).
 
 ## Content notes
 
@@ -101,6 +84,8 @@ docs/                      architecture, database, features, roadmap, log
 
 ## Documentation
 
+- [docs/GUIDE.md](docs/GUIDE.md): **start here**. Onboarding, folder map, common tasks, conventions
+- [PRODUCT.md](PRODUCT.md): who it's for, positioning and product principles
 - [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md): how the pieces fit and why
 - [docs/DATABASE.md](docs/DATABASE.md): schema, RLS and search
 - [docs/FEATURES.md](docs/FEATURES.md): what is implemented, and how

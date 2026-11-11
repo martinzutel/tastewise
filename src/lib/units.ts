@@ -40,7 +40,7 @@ export function dimensionOf(unit: string | null): Dimension | null {
   return null;
 }
 
-export function toBase(quantity: number, unit: string): number {
+function toBase(quantity: number, unit: string): number {
   const u = normalizeUnit(unit)!;
   return quantity * (MASS[u] ?? VOLUME[u] ?? 1);
 }

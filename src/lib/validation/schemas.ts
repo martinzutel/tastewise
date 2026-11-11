@@ -35,7 +35,6 @@ export const signInSchema = z.object({
   email: z.string().trim().email("Enter a valid email address"),
   password: z.string().min(8, "Passwords are at least 8 characters"),
 });
-export type SignInValues = z.infer<typeof signInSchema>;
 
 /* ---------- persisted guest data ---------- */
 

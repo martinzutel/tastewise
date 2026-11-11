@@ -1,4 +1,4 @@
-import { RecipeCard } from "@/components/recipe/recipe-card";
+import { RecipeCard } from "./recipe-card";
 import type { RecipeSummary } from "@/lib/types";
 
 /** Horizontal scrolling collection. Native scroll + snap; works with touch, trackpad and keyboard. */

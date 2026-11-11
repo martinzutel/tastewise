@@ -76,5 +76,6 @@ Status: **Implemented** = works end to end in demo mode (and is wired to Supabas
 
 - Header search dialog (⌘K / Ctrl+K) backed by `/api/recipes`.
 - Toasts for saves, list changes, and errors. Optimistic updates roll back on failure.
+- If saved data can't be loaded, a banner says so (nothing was deleted) with a "Try again" button, so empty screens aren't mistaken for lost data.
 - Accessibility: skip link, landmarks, labelled controls, visible focus rings, `aria-pressed` / `aria-checked` states, live regions for result counts, image alt text, AA contrast tokens.
 - Responsive: desktop top navigation; mobile bottom tab bar (Discover, Explore, Pantry, Saved, Shopping); phone-specific layouts on every page; 40–48 px touch targets; 16 px form text so iOS doesn't zoom on focus; no horizontal page scroll at 375 px.

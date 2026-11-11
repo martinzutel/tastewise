@@ -1,18 +1,17 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import { useMemo, useState } from "react";
-import { PlusIcon, ShoppingBasketIcon, WheatIcon, XIcon } from "lucide-react";
+import { PlusIcon, WheatIcon } from "lucide-react";
 import { EmptyState } from "@/components/common/empty-state";
 import { Button } from "@/components/ui/button";
 import { INGREDIENT_CATEGORY_LABELS, shoppingCategoryFor } from "@/lib/constants";
-import { formatList } from "@/lib/format";
 import { filterMatches, matchPantry, type MatchFilter } from "@/lib/services/pantry-matching";
 import { cn } from "@/lib/utils";
-import { INGREDIENT_CATEGORIES, type Ingredient, type PantryItem, type RecipeSummary } from "@/lib/types";
+import { INGREDIENT_CATEGORIES, type Ingredient, type RecipeSummary } from "@/lib/types";
 import { useUserData } from "@/lib/user-data/provider";
-import { IngredientPicker } from "./ingredient-picker";
+import { IngredientPicker } from "@/components/common/ingredient-picker";
+import { MatchList } from "./match-list";
+import { PantryRow } from "./pantry-row";
 
 const QUICK_ADD = [
   "eggs",
@@ -245,128 +244,9 @@ export function PantryClient({ recipes, ingredients }: { recipes: RecipeSummary[
               : "No recipes in this group. Add more ingredients, or try another filter."}
           </div>
         ) : (
-          <ul className="mt-2 divide-y divide-line">
-            {visible.map((m) => (
-              <li
-                key={m.recipe.id}
-                className="group relative grid grid-cols-[76px_1fr] gap-4 py-5 sm:grid-cols-[120px_1fr] sm:gap-5 sm:py-6"
-              >
-                <div className="relative aspect-square overflow-hidden rounded-md bg-paper-3">
-                  <Image src={m.recipe.imageUrl} alt={m.recipe.imageAlt} fill sizes="120px" className="object-cover" />
-                </div>
-                <div className="min-w-0">
-                  <div className="flex items-baseline justify-between gap-4">
-                    <h3 className="font-display text-[1.3rem] leading-[1.1] text-ink sm:text-[1.5rem]">
-                      <Link href={`/recipes/${m.recipe.slug}`} className="hover:text-sage-ink">
-                        {m.recipe.title}
-                      </Link>
-                    </h3>
-                    <span
-                      className={cn(
-                        "shrink-0 text-sm font-semibold tabular-nums",
-                        m.missing.length === 0 ? "text-sage-ink" : "text-ink",
-                      )}
-                    >
-                      {m.percent}%
-                    </span>
-                  </div>
-                  <div
-                    className="mt-2.5 h-1 overflow-hidden rounded-full bg-paper-2"
-                    role="progressbar"
-                    aria-valuenow={m.percent}
-                    aria-valuemin={0}
-                    aria-valuemax={100}
-                    aria-label={`${m.percent}% of ingredients available`}
-                  >
-                    <div
-                      className={cn(
-                        "h-full rounded-full transition-[width] duration-500",
-                        m.missing.length === 0 ? "bg-sage" : "bg-sage/70",
-                      )}
-                      style={{ width: `${m.percent}%` }}
-                    />
-                  </div>
-                  <p className="mt-2 text-[0.85rem] text-ink-muted">
-                    {m.percent}% of ingredients available ({m.available} of {m.total})
-                  </p>
-                  {m.missing.length > 0 ? (
-                    <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-2">
-                      <p className="text-[0.88rem] text-ink">
-                        <span className="text-clay-ink">Missing:</span> {formatList(m.missing.map((x) => x.name))}
-                      </p>
-                      <button
-                        type="button"
-                        onClick={() => addMissing(m.recipe, m.missing)}
-                        className="inline-flex items-center gap-1.5 text-[0.82rem] font-medium text-sage-ink underline-offset-4 hover:underline"
-                      >
-                        <ShoppingBasketIcon className="size-3.5" aria-hidden />
-                        Add missing to list
-                      </button>
-                    </div>
-                  ) : (
-                    <p className="mt-1.5 text-[0.88rem] font-medium text-sage-ink">You have everything you need</p>
-                  )}
-                </div>
-              </li>
-            ))}
-          </ul>
+          <MatchList matches={visible} onAddMissing={addMissing} />
         )}
       </section>
     </div>
-  );
-}
-
-function PantryRow({
-  item,
-  onRemove,
-  onChange,
-}: {
-  item: PantryItem;
-  onRemove: () => void;
-  onChange: (patch: Partial<Pick<PantryItem, "quantity" | "unit">>) => void;
-}) {
-  const [qty, setQty] = useState(item.quantity?.toString() ?? "");
-  const [unit, setUnit] = useState(item.unit ?? "");
-
-  const commit = () => {
-    const n = qty.trim() === "" ? null : Number(qty);
-    const quantity = n !== null && Number.isFinite(n) && n > 0 ? n : null;
-    if (quantity === null && qty.trim() !== "") setQty("");
-    const u = unit.trim() || null;
-    if (quantity !== item.quantity || u !== item.unit) onChange({ quantity, unit: u });
-  };
-
-  return (
-    <li className="flex items-center gap-3 py-2.5">
-      <span className="min-w-0 flex-1 truncate text-[0.95rem] text-ink first-letter:uppercase">{item.name}</span>
-      <input
-        inputMode="decimal"
-        value={qty}
-        onChange={(e) => setQty(e.target.value)}
-        onBlur={commit}
-        onKeyDown={(e) => e.key === "Enter" && (e.currentTarget as HTMLInputElement).blur()}
-        placeholder="Qty"
-        aria-label={`Quantity of ${item.name}`}
-        className="h-10 w-14 rounded-sm border border-transparent bg-transparent px-2 text-right text-sm tabular-nums transition-colors outline-none placeholder:text-ink-faint hover:border-line focus:border-sage focus:bg-surface sm:h-9"
-      />
-      <input
-        value={unit}
-        onChange={(e) => setUnit(e.target.value)}
-        onBlur={commit}
-        onKeyDown={(e) => e.key === "Enter" && (e.currentTarget as HTMLInputElement).blur()}
-        placeholder="unit"
-        aria-label={`Unit for ${item.name}`}
-        className="h-10 w-14 rounded-sm border border-transparent bg-transparent px-2 text-sm transition-colors outline-none placeholder:text-ink-faint hover:border-line focus:border-sage focus:bg-surface sm:h-9"
-      />
-      <Button
-        variant="ghost"
-        size="icon"
-        onClick={onRemove}
-        aria-label={`Remove ${item.name}`}
-        className="text-ink-faint hover:text-ink"
-      >
-        <XIcon className="size-4" />
-      </Button>
-    </li>
   );
 }

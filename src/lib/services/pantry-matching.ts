@@ -16,7 +16,7 @@ export interface PantryMatch {
 
 export type MatchFilter = "all" | "complete" | "one-or-two" | "most";
 
-export function matchRecipe(recipe: RecipeSummary, pantryIds: Set<string>): PantryMatch {
+function matchRecipe(recipe: RecipeSummary, pantryIds: Set<string>): PantryMatch {
   const total = recipe.ingredientIds.length;
   const missing = recipe.ingredientIds
     .filter((id) => !pantryIds.has(id))

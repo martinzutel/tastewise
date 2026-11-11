@@ -31,7 +31,7 @@ function searchDocument(r: Recipe) {
 }
 
 /** Returns a relevance score, or 0 when any query term is missing. */
-export function scoreText(r: Recipe, q: string): number {
+function scoreText(r: Recipe, q: string): number {
   const terms = normalize(q).split(/\s+/).filter(Boolean);
   if (!terms.length) return 1;
   const doc = searchDocument(r);
@@ -47,7 +47,7 @@ export function scoreText(r: Recipe, q: string): number {
   return score;
 }
 
-export function matchesFilters(r: RecipeSummary, query: RecipeQuery): boolean {
+function matchesFilters(r: RecipeSummary, query: RecipeQuery): boolean {
   if (query.time?.length) {
     const ok = query.time.some((b) => {
       const [min, max] = TIME_RANGES[b];

@@ -21,7 +21,7 @@ export function hasPreferences(p: Preferences): boolean {
 }
 
 /** Hard constraints: dietary needs and disliked ingredients exclude a recipe. */
-export function satisfiesPreferences(r: RecipeSummary, p: Preferences): boolean {
+function satisfiesPreferences(r: RecipeSummary, p: Preferences): boolean {
   if (!p.diets.every((d) => r.diets.includes(d))) return false;
   if (p.dislikedIngredients.some((id) => r.ingredientIds.includes(id))) return false;
   return true;
@@ -35,7 +35,7 @@ export interface ScoredRecipe<T extends RecipeSummary = RecipeSummary> {
 
 const DIFFICULTY_RANK = { easy: 0, medium: 1, advanced: 2 } as const;
 
-export function scoreRecipe<T extends RecipeSummary>(
+function scoreRecipe<T extends RecipeSummary>(
   r: T,
   p: Preferences,
   ingredientName: (id: string) => string,

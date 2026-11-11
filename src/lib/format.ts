@@ -38,7 +38,7 @@ function asFraction(value: number): string {
  * Formats a quantity for display. Metric weights and volumes round to
  * sensible kitchen precision; spoons, cups and counts use fractions.
  */
-export function formatQuantity(quantity: number | null, unit: string | null): string {
+function formatQuantity(quantity: number | null, unit: string | null): string {
   if (quantity === null) return "";
   const u = normalizeUnit(unit);
   const dim = dimensionOf(u);
@@ -73,7 +73,7 @@ const PLURAL_UNITS: Record<string, string> = {
   jar: "jars",
 };
 
-export function formatUnit(unit: string | null, quantity: number | null): string {
+function formatUnit(unit: string | null, quantity: number | null): string {
   const u = normalizeUnit(unit);
   if (!u) return "";
   if (quantity !== null && quantity > 1 && PLURAL_UNITS[u]) return PLURAL_UNITS[u];

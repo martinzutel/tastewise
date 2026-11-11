@@ -2,3 +2,4 @@ node_modules
 .next
 supabase/seed.sql
 package-lock.json
+.vercel

@@ -10,7 +10,9 @@
     "typecheck": "tsc --noEmit",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "db:seed:generate": "node scripts/generate-seed-sql.ts"
+    "db:seed:generate": "node scripts/generate-seed-sql.ts",
+    "check": "npm run typecheck && npm run lint && npm run format:check",
+    "unused": "npx -y knip@5"
   },
   "dependencies": {
     "@hookform/resolvers": "^7.0.2",

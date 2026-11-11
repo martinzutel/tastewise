@@ -57,3 +57,27 @@
 - The recipe jump bar uses a scroll-spy, so it highlights the right section in areas between anchors.
 
 **Ops note.** Running `next build` (or a deploy that builds locally) while `next dev` is running corrupts the dev server's `.next` cache and every page returns 500. Stop the dev server first, or delete `.next` and restart.
+
+## 2026-11-11: Images, cleanup and developer guide
+
+**Images.**
+
+- Every photo was rechecked against its recipe. The "strawberry pavlova" photo showed crêpes, so the recipe was rewritten as strawberry crêpes with whipped cream: easier, and a better fit for beginner cooks.
+- `recipes/[slug]/loading.tsx` was removed. The recipe pages are pre-rendered, so the skeleton only ever flashed grey boxes on slow phones, which looked like missing images.
+- The default Next.js favicon was replaced with the Tastewise leaf (`src/app/icon.svg`).
+
+**Cleanup.**
+
+- knip found 7 unused shadcn components; they were deleted. Helpers used only inside their own module are no longer exported.
+- The dead `facetCounts` prop on the filter panel was removed, as was the unused `dataSourceName` export.
+- `knip.json` records the known exceptions (shadcn primitives, config-only dependencies, dynamically imported modules marked `@public`), so `npm run unused` reports clean.
+
+**Structure.**
+
+- The recipe page was split into `RecipeFacts`, `RecipeNotes`, `NutritionTable` and `RecipeTags`.
+- The pantry screen was split into `PantryRow` and `MatchList`.
+- `IngredientPicker` moved to `components/common/` (used by the pantry and the account page), and `RecipeRail` moved to `components/recipe/`.
+
+**Missing state fixed.** The user-data provider had an error status and a `retry` function that nothing used. A storage error banner now uses them.
+
+**Docs.** Added `docs/GUIDE.md` (onboarding for new developers) and the `npm run check` and `npm run unused` scripts.

@@ -11,10 +11,8 @@ import type { RecipeSource } from "./sources/types";
  */
 const source: RecipeSource = isSupabaseConfigured ? supabaseSource : seedSource;
 
-export const dataSourceName = source.name;
-
 /** Strips the heavy fields before data crosses into client components. */
-export function toSummary(r: Recipe): RecipeSummary {
+function toSummary(r: Recipe): RecipeSummary {
   return {
     id: r.id,
     slug: r.slug,
@@ -41,7 +39,7 @@ export function toSummary(r: Recipe): RecipeSummary {
   };
 }
 
-export const listRecipes = cache(async (): Promise<Recipe[]> => source.listRecipes());
+const listRecipes = cache(async (): Promise<Recipe[]> => source.listRecipes());
 
 export const listRecipeSummaries = cache(async (): Promise<RecipeSummary[]> => (await listRecipes()).map(toSummary));
 

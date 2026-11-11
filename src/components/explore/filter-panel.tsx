@@ -30,11 +30,9 @@ export const FILTER_GROUPS: {
 export function FilterPanel({
   query,
   onToggle,
-  facetCounts,
 }: {
   query: RecipeQuery;
   onToggle: (key: ListKey, value: string) => void;
-  facetCounts?: Partial<Record<ListKey, Record<string, number>>>;
 }) {
   return (
     <div className="space-y-8">
@@ -47,7 +45,6 @@ export function FilterPanel({
             <div className="flex flex-col gap-0.5">
               {group.options.map((value) => {
                 const checked = selected.includes(value);
-                const count = facetCounts?.[group.key]?.[value];
                 const id = `f-${group.key}-${value}`;
                 return (
                   <label
@@ -75,7 +72,6 @@ export function FilterPanel({
                       {checked && <CheckIcon className="size-3" strokeWidth={3} />}
                     </span>
                     <span className="flex-1">{group.labels[value]}</span>
-                    {count !== undefined && <span className="text-xs text-ink-faint tabular-nums">{count}</span>}
                   </label>
                 );
               })}

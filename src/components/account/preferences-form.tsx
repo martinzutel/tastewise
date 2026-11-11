@@ -5,7 +5,7 @@ import { CheckIcon, XIcon } from "lucide-react";
 import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import type { z } from "zod";
-import { IngredientPicker } from "@/components/pantry/ingredient-picker";
+import { IngredientPicker } from "@/components/common/ingredient-picker";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { CUISINE_LABELS, DIET_LABELS, DIFFICULTY_LABELS, MAX_TIME_OPTIONS } from "@/lib/constants";

@@ -1,7 +1,7 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 
-export function RecipeCardSkeleton({ className }: { className?: string }) {
+function RecipeCardSkeleton({ className }: { className?: string }) {
   return (
     <div className={cn("flex flex-col", className)} aria-hidden>
       <Skeleton className="aspect-[4/3] w-full rounded-lg bg-paper-3" />

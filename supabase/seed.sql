@@ -14,7 +14,7 @@ insert into public.ingredients (id, name, plural, category, is_staple, contains_
   ('tomato', 'tomato', 'tomatoes', 'vegetables', false, false, false, false, false, false, false),
   ('cherry-tomatoes', 'cherry tomatoes', null, 'vegetables', false, false, false, false, false, false, false),
   ('bell-pepper', 'bell pepper', 'bell peppers', 'vegetables', false, false, false, false, false, false, false),
-  ('red-chili', 'red chilli', 'red chillies', 'vegetables', false, false, false, false, false, false, false),
+  ('red-chili', 'red chili', 'red chilies', 'vegetables', false, false, false, false, false, false, false),
   ('jalapeno', 'jalapeño', 'jalapeños', 'vegetables', false, false, false, false, false, false, false),
   ('spinach', 'spinach', null, 'vegetables', false, false, false, false, false, false, false),
   ('kale', 'kale', null, 'vegetables', false, false, false, false, false, false, false),
@@ -105,7 +105,7 @@ insert into public.ingredients (id, name, plural, category, is_staple, contains_
   ('cumin', 'ground cumin', null, 'spices', false, false, false, false, false, false, false),
   ('smoked-paprika', 'smoked paprika', null, 'spices', false, false, false, false, false, false, false),
   ('paprika', 'sweet paprika', null, 'spices', false, false, false, false, false, false, false),
-  ('chili-flakes', 'chilli flakes', null, 'spices', false, false, false, false, false, false, false),
+  ('chili-flakes', 'chili flakes', null, 'spices', false, false, false, false, false, false, false),
   ('garam-masala', 'garam masala', null, 'spices', false, false, false, false, false, false, false),
   ('turmeric', 'ground turmeric', null, 'spices', false, false, false, false, false, false, false),
   ('cinnamon', 'ground cinnamon', null, 'spices', false, false, false, false, false, false, false),
@@ -183,7 +183,7 @@ insert into public.recipe_ingredients (recipe_id, ingredient_id, position, quant
   ((select id from public.recipes where slug = 'shakshuka-with-feta'), 'sourdough-bread', 14, 4, 'slice', 'toasted, to serve', true);
 insert into public.recipe_steps (recipe_id, step_number, instruction) values
   ((select id from public.recipes where slug = 'shakshuka-with-feta'), 1, 'Warm the olive oil in a wide, deep frying pan over medium heat. Add the onion and pepper with a pinch of salt and cook for 8–10 minutes, stirring now and then, until soft and sweet.'),
-  ((select id from public.recipes where slug = 'shakshuka-with-feta'), 2, 'Stir in the garlic, cumin, paprika and chilli flakes and cook for 1 minute, until fragrant.'),
+  ((select id from public.recipes where slug = 'shakshuka-with-feta'), 2, 'Stir in the garlic, cumin, paprika and chili flakes and cook for 1 minute, until fragrant.'),
   ((select id from public.recipes where slug = 'shakshuka-with-feta'), 3, 'Tip in the tomatoes, season well and simmer for 10 minutes, until the sauce has thickened enough to hold a hollow when you drag a spoon through it.'),
   ((select id from public.recipes where slug = 'shakshuka-with-feta'), 4, 'Make six small wells in the sauce and crack an egg into each. Cover the pan and cook over low heat for 5–7 minutes, until the whites are set but the yolks are still runny.'),
   ((select id from public.recipes where slug = 'shakshuka-with-feta'), 5, 'Scatter over the feta and cilantro, grind over some pepper and bring the pan straight to the table with toasted bread.');
@@ -222,7 +222,7 @@ insert into public.recipe_substitutions (recipe_id, position, ingredient, substi
   ((select id from public.recipes where slug = 'buttermilk-pancakes'), 1, 'buttermilk', '450 ml milk plus 2 tbsp lemon juice, left to stand for 5 minutes');
 
 -- Avocado toast with jammy eggs
-insert into public.recipes (slug, title, description, image_url, image_alt, prep_time, cook_time, rest_time, difficulty, cuisine, servings, rating, review_count, popularity, is_featured, is_vegetarian, is_vegan, is_gluten_free, is_dairy_free, calories, protein, carbohydrates, fat, nutrition_verified, notes, tags, created_at) values ('avocado-toast-jammy-eggs', 'Avocado toast with jammy eggs', 'Crushed avocado with lemon and chilli on charred sourdough, topped with soft, golden-yolked eggs.', 'https://images.unsplash.com/photo-1482049016688-2d3e1b311543?auto=format&fit=crop&w=1200&q=80', 'Avocado toast topped with halved soft-boiled eggs on a dark plate', 5, 7, 0, 'easy', 'American', 2, 4.6, 167, 86, false, true, false, false, true, 380, 14, 30, 24, false, null, array['quick', 'high-protein']::text[], '2026-08-09T09:00:00Z');
+insert into public.recipes (slug, title, description, image_url, image_alt, prep_time, cook_time, rest_time, difficulty, cuisine, servings, rating, review_count, popularity, is_featured, is_vegetarian, is_vegan, is_gluten_free, is_dairy_free, calories, protein, carbohydrates, fat, nutrition_verified, notes, tags, created_at) values ('avocado-toast-jammy-eggs', 'Avocado toast with jammy eggs', 'Crushed avocado with lemon and chili on charred sourdough, topped with soft, golden-yolked eggs.', 'https://images.unsplash.com/photo-1482049016688-2d3e1b311543?auto=format&fit=crop&w=1200&q=80', 'Avocado toast topped with halved soft-boiled eggs on a dark plate', 5, 7, 0, 'easy', 'American', 2, 4.6, 167, 86, false, true, false, false, true, 380, 14, 30, 24, false, null, array['quick', 'high-protein']::text[], '2026-08-09T09:00:00Z');
 insert into public.recipe_categories (recipe_id, category_id) select (select id from public.recipes where slug = 'avocado-toast-jammy-eggs'), id from public.categories where slug in ('breakfast', 'lunch');
 insert into public.recipe_ingredients (recipe_id, ingredient_id, position, quantity, unit, note, is_optional) values
   ((select id from public.recipes where slug = 'avocado-toast-jammy-eggs'), 'eggs', 1, 2, null, null, false),
@@ -239,7 +239,7 @@ insert into public.recipe_steps (recipe_id, step_number, instruction) values
   ((select id from public.recipes where slug = 'avocado-toast-jammy-eggs'), 2, 'Move the eggs to a bowl of cold water for 2 minutes, then peel carefully.'),
   ((select id from public.recipes where slug = 'avocado-toast-jammy-eggs'), 3, 'Meanwhile, toast or griddle the sourdough until well charred at the edges, then drizzle with olive oil.'),
   ((select id from public.recipes where slug = 'avocado-toast-jammy-eggs'), 4, 'Halve the avocado, scoop it into a bowl and crush with the lemon juice, a pinch of salt and pepper.'),
-  ((select id from public.recipes where slug = 'avocado-toast-jammy-eggs'), 5, 'Pile the avocado onto the toast, halve the eggs over the top and finish with chilli flakes, flaky salt and chives.');
+  ((select id from public.recipes where slug = 'avocado-toast-jammy-eggs'), 5, 'Pile the avocado onto the toast, halve the eggs over the top and finish with chili flakes, flaky salt and chives.');
 insert into public.recipe_tips (recipe_id, position, tip) values
   ((select id from public.recipes where slug = 'avocado-toast-jammy-eggs'), 1, 'Eggs straight from the fridge need the full 6½ minutes. Room-temperature eggs need closer to 6.');
 insert into public.recipe_substitutions (recipe_id, position, ingredient, substitute) values
@@ -287,7 +287,7 @@ insert into public.recipe_substitutions (recipe_id, position, ingredient, substi
   ((select id from public.recipes where slug = 'strawberry-chia-pudding'), 1, 'almond milk', 'Oat milk, coconut drinking milk or whole milk');
 
 -- Brioche French toast with blueberries
-insert into public.recipes (slug, title, description, image_url, image_alt, prep_time, cook_time, rest_time, difficulty, cuisine, servings, rating, review_count, popularity, is_featured, is_vegetarian, is_vegan, is_gluten_free, is_dairy_free, calories, protein, carbohydrates, fat, nutrition_verified, notes, tags, created_at) values ('brioche-french-toast', 'Brioche French toast with blueberries', 'Thick slices of brioche soaked in a cinnamon custard and fried in butter until caramelised.', 'https://images.unsplash.com/photo-1484723091739-30a097e8f929?auto=format&fit=crop&w=1200&q=80', 'French toast with blueberries, banana slices and syrup', 10, 15, 0, 'easy', 'French', 2, 4.8, 243, 83, false, true, false, false, false, 560, 16, 68, 25, false, null, array['brunch', 'weekend']::text[], '2026-08-15T09:00:00Z');
+insert into public.recipes (slug, title, description, image_url, image_alt, prep_time, cook_time, rest_time, difficulty, cuisine, servings, rating, review_count, popularity, is_featured, is_vegetarian, is_vegan, is_gluten_free, is_dairy_free, calories, protein, carbohydrates, fat, nutrition_verified, notes, tags, created_at) values ('brioche-french-toast', 'Brioche French toast with blueberries', 'Thick slices of brioche soaked in a cinnamon custard and fried in butter until caramelized.', 'https://images.unsplash.com/photo-1484723091739-30a097e8f929?auto=format&fit=crop&w=1200&q=80', 'French toast with blueberries, banana slices and syrup', 10, 15, 0, 'easy', 'French', 2, 4.8, 243, 83, false, true, false, false, false, 560, 16, 68, 25, false, null, array['brunch', 'weekend']::text[], '2026-08-15T09:00:00Z');
 insert into public.recipe_categories (recipe_id, category_id) select (select id from public.recipes where slug = 'brioche-french-toast'), id from public.categories where slug in ('breakfast');
 insert into public.recipe_ingredients (recipe_id, ingredient_id, position, quantity, unit, note, is_optional) values
   ((select id from public.recipes where slug = 'brioche-french-toast'), 'eggs', 1, 3, null, null, false),
@@ -339,7 +339,7 @@ insert into public.recipe_substitutions (recipe_id, position, ingredient, substi
   ((select id from public.recipes where slug = 'blueberry-muffins'), 1, 'blueberries', 'Raspberries or chopped strawberries');
 
 -- Margherita pizza at home
-insert into public.recipes (slug, title, description, image_url, image_alt, prep_time, cook_time, rest_time, difficulty, cuisine, servings, rating, review_count, popularity, is_featured, is_vegetarian, is_vegan, is_gluten_free, is_dairy_free, calories, protein, carbohydrates, fat, nutrition_verified, notes, tags, created_at) values ('margherita-pizza', 'Margherita pizza at home', 'A blistered, chewy crust with bright tomato, milky mozzarella and basil. Made in a regular home oven.', 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=1200&q=80', 'A margherita pizza with melted mozzarella and fresh basil leaves', 25, 10, 120, 'medium', 'Italian', 4, 4.9, 502, 97, true, true, false, false, false, 620, 27, 88, 17, false, 'The dough can rise slowly in the fridge for up to 48 hours, which deepens the flavour. Bring it to room temperature for an hour before stretching.', array['weekend', 'crowd-pleaser']::text[], '2026-08-20T09:00:00Z');
+insert into public.recipes (slug, title, description, image_url, image_alt, prep_time, cook_time, rest_time, difficulty, cuisine, servings, rating, review_count, popularity, is_featured, is_vegetarian, is_vegan, is_gluten_free, is_dairy_free, calories, protein, carbohydrates, fat, nutrition_verified, notes, tags, created_at) values ('margherita-pizza', 'Margherita pizza at home', 'A blistered, chewy crust with bright tomato, milky mozzarella and basil. Made in a regular home oven.', 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=1200&q=80', 'A margherita pizza with melted mozzarella and fresh basil leaves', 25, 10, 120, 'medium', 'Italian', 4, 4.9, 502, 97, true, true, false, false, false, 620, 27, 88, 17, false, 'The dough can rise slowly in the fridge for up to 48 hours, which deepens the flavor. Bring it to room temperature for an hour before stretching.', array['weekend', 'crowd-pleaser']::text[], '2026-08-20T09:00:00Z');
 insert into public.recipe_categories (recipe_id, category_id) select (select id from public.recipes where slug = 'margherita-pizza'), id from public.categories where slug in ('dinner', 'baking');
 insert into public.recipe_ingredients (recipe_id, ingredient_id, position, quantity, unit, note, is_optional) values
   ((select id from public.recipes where slug = 'margherita-pizza'), 'bread-flour', 1, 500, 'g', 'plus extra for dusting', false),
@@ -360,7 +360,7 @@ insert into public.recipe_steps (recipe_id, step_number, instruction) values
   ((select id from public.recipes where slug = 'margherita-pizza'), 6, 'Finish with basil, a drizzle of olive oil and parmesan, if using. Slice and eat straight away.');
 insert into public.recipe_tips (recipe_id, position, tip) values
   ((select id from public.recipes where slug = 'margherita-pizza'), 1, 'Press the dough out with your fingertips rather than a rolling pin to keep the air in the rim.'),
-  ((select id from public.recipes where slug = 'margherita-pizza'), 2, 'Squeeze excess water from the mozzarella so the centre doesn''t go soggy.');
+  ((select id from public.recipes where slug = 'margherita-pizza'), 2, 'Squeeze excess water from the mozzarella so the center doesn''t go soggy.');
 insert into public.recipe_substitutions (recipe_id, position, ingredient, substitute) values
   ((select id from public.recipes where slug = 'margherita-pizza'), 1, 'strong bread flour', 'Italian ''00'' flour'),
   ((select id from public.recipes where slug = 'margherita-pizza'), 2, 'fresh mozzarella', 'Low-moisture mozzarella, grated');
@@ -422,7 +422,7 @@ insert into public.recipe_substitutions (recipe_id, position, ingredient, substi
   ((select id from public.recipes where slug = 'lemon-herb-roast-chicken'), 1, 'whole chicken', '1.2 kg bone-in chicken thighs, roasted for 40–45 minutes');
 
 -- Miso-glazed salmon with asparagus
-insert into public.recipes (slug, title, description, image_url, image_alt, prep_time, cook_time, rest_time, difficulty, cuisine, servings, rating, review_count, popularity, is_featured, is_vegetarian, is_vegan, is_gluten_free, is_dairy_free, calories, protein, carbohydrates, fat, nutrition_verified, notes, tags, created_at) values ('miso-glazed-salmon', 'Miso-glazed salmon with asparagus', 'Sweet, savoury miso caramelises under the grill while the asparagus roasts alongside. Dinner in 25 minutes.', 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=1200&q=80', 'A glazed salmon fillet with asparagus on a dark plate', 10, 12, 0, 'easy', 'Japanese', 4, 4.7, 198, 85, false, false, false, false, true, 450, 36, 32, 19, false, null, array['quick', 'weeknight', 'high-protein']::text[], '2026-09-04T09:00:00Z');
+insert into public.recipes (slug, title, description, image_url, image_alt, prep_time, cook_time, rest_time, difficulty, cuisine, servings, rating, review_count, popularity, is_featured, is_vegetarian, is_vegan, is_gluten_free, is_dairy_free, calories, protein, carbohydrates, fat, nutrition_verified, notes, tags, created_at) values ('miso-glazed-salmon', 'Miso-glazed salmon with asparagus', 'Sweet, savory miso caramelizes under the broiler while the asparagus roasts alongside. Dinner in 25 minutes.', 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=1200&q=80', 'A glazed salmon fillet with asparagus on a dark plate', 10, 12, 0, 'easy', 'Japanese', 4, 4.7, 198, 85, false, false, false, false, true, 450, 36, 32, 19, false, null, array['quick', 'weeknight', 'high-protein']::text[], '2026-09-04T09:00:00Z');
 insert into public.recipe_categories (recipe_id, category_id) select (select id from public.recipes where slug = 'miso-glazed-salmon'), id from public.categories where slug in ('dinner', 'lunch');
 insert into public.recipe_ingredients (recipe_id, ingredient_id, position, quantity, unit, note, is_optional) values
   ((select id from public.recipes where slug = 'miso-glazed-salmon'), 'white-miso', 1, 3, 'tbsp', null, false),
@@ -437,10 +437,10 @@ insert into public.recipe_ingredients (recipe_id, ingredient_id, position, quant
   ((select id from public.recipes where slug = 'miso-glazed-salmon'), 'sesame-seeds', 10, 1, 'tsp', null, true),
   ((select id from public.recipes where slug = 'miso-glazed-salmon'), 'jasmine-rice', 11, 300, 'g', 'cooked, to serve', true);
 insert into public.recipe_steps (recipe_id, step_number, instruction) values
-  ((select id from public.recipes where slug = 'miso-glazed-salmon'), 1, 'Heat the grill to high and line a baking tray with foil.'),
+  ((select id from public.recipes where slug = 'miso-glazed-salmon'), 1, 'Heat the broiler to high and line a baking tray with foil.'),
   ((select id from public.recipes where slug = 'miso-glazed-salmon'), 2, 'Stir the miso, mirin, soy sauce, sugar and sesame oil into a smooth glaze.'),
   ((select id from public.recipes where slug = 'miso-glazed-salmon'), 3, 'Put the salmon skin-side down on the tray, toss the asparagus in the oil and arrange it around the fish.'),
-  ((select id from public.recipes where slug = 'miso-glazed-salmon'), 4, 'Spread the glaze thickly over the salmon. Grill for 8–10 minutes, until the glaze is caramelised in patches and the salmon flakes easily.'),
+  ((select id from public.recipes where slug = 'miso-glazed-salmon'), 4, 'Spread the glaze thickly over the salmon. Broil for 8–10 minutes, until the glaze is caramelized in patches and the salmon flakes easily.'),
   ((select id from public.recipes where slug = 'miso-glazed-salmon'), 5, 'Scatter with spring onions and sesame seeds and serve with rice.');
 insert into public.recipe_tips (recipe_id, position, tip) values
   ((select id from public.recipes where slug = 'miso-glazed-salmon'), 1, 'Watch the salmon closely for the last few minutes. The sugar in the glaze can catch quickly.');
@@ -480,7 +480,7 @@ insert into public.recipe_substitutions (recipe_id, position, ingredient, substi
   ((select id from public.recipes where slug = 'shoyu-ramen-with-prawns'), 2, 'fresh ramen noodles', 'Dried ramen or rice noodles (for gluten-free, with tamari)');
 
 -- Salmon sushi bowl
-insert into public.recipes (slug, title, description, image_url, image_alt, prep_time, cook_time, rest_time, difficulty, cuisine, servings, rating, review_count, popularity, is_featured, is_vegetarian, is_vegan, is_gluten_free, is_dairy_free, calories, protein, carbohydrates, fat, nutrition_verified, notes, tags, created_at) values ('salmon-sushi-bowl', 'Salmon sushi bowl', 'Seasoned rice topped with soy-marinated salmon, avocado, cucumber and edamame. All the pleasure of sushi, none of the rolling.', 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=1200&q=80', 'A colourful bowl with rice, salmon, avocado, vegetables and seeds', 25, 15, 0, 'easy', 'Japanese', 4, 4.6, 144, 82, false, false, false, false, true, 560, 31, 64, 20, false, null, array['no-oven', 'fresh']::text[], '2026-09-11T09:00:00Z');
+insert into public.recipes (slug, title, description, image_url, image_alt, prep_time, cook_time, rest_time, difficulty, cuisine, servings, rating, review_count, popularity, is_featured, is_vegetarian, is_vegan, is_gluten_free, is_dairy_free, calories, protein, carbohydrates, fat, nutrition_verified, notes, tags, created_at) values ('salmon-sushi-bowl', 'Salmon sushi bowl', 'Seasoned rice topped with soy-marinated salmon, avocado, cucumber and edamame. All the pleasure of sushi, none of the rolling.', 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=1200&q=80', 'A colorful bowl with rice, salmon, avocado, vegetables and seeds', 25, 15, 0, 'easy', 'Japanese', 4, 4.6, 144, 82, false, false, false, false, true, 560, 31, 64, 20, false, null, array['no-oven', 'fresh']::text[], '2026-09-11T09:00:00Z');
 insert into public.recipe_categories (recipe_id, category_id) select (select id from public.recipes where slug = 'salmon-sushi-bowl'), id from public.categories where slug in ('lunch', 'dinner');
 insert into public.recipe_ingredients (recipe_id, ingredient_id, position, quantity, unit, note, is_optional) values
   ((select id from public.recipes where slug = 'salmon-sushi-bowl'), 'sushi-rice', 1, 300, 'g', null, false),
@@ -557,7 +557,7 @@ insert into public.recipe_ingredients (recipe_id, ingredient_id, position, quant
   ((select id from public.recipes where slug = 'chicken-tikka-masala'), 'basmati-rice', 16, 300, 'g', 'to serve', true);
 insert into public.recipe_steps (recipe_id, step_number, instruction) values
   ((select id from public.recipes where slug = 'chicken-tikka-masala'), 1, 'Mix the yogurt with 1 tsp garam masala, the turmeric, half the ginger and garlic and a pinch of salt. Coat the chicken and marinate for at least 30 minutes.'),
-  ((select id from public.recipes where slug = 'chicken-tikka-masala'), 2, 'Heat the grill to high. Spread the chicken on a lined tray and grill for 8–10 minutes, turning once, until charred at the edges.'),
+  ((select id from public.recipes where slug = 'chicken-tikka-masala'), 2, 'Heat the broiler to high. Spread the chicken on a lined tray and broil for 8–10 minutes, turning once, until charred at the edges.'),
   ((select id from public.recipes where slug = 'chicken-tikka-masala'), 3, 'Meanwhile, heat the oil and butter in a large pan and cook the onion for 10 minutes until golden. Add the remaining ginger and garlic, the cumin, paprika and remaining garam masala and cook for 1 minute.'),
   ((select id from public.recipes where slug = 'chicken-tikka-masala'), 4, 'Add the tomatoes and simmer for 15 minutes, then blend until smooth if you like a silkier sauce.'),
   ((select id from public.recipes where slug = 'chicken-tikka-masala'), 5, 'Stir in the cream and chicken and simmer for 5 minutes. Season, scatter with cilantro and serve with rice.');
@@ -568,7 +568,7 @@ insert into public.recipe_substitutions (recipe_id, position, ingredient, substi
   ((select id from public.recipes where slug = 'chicken-tikka-masala'), 2, 'chicken', 'Paneer, added in the final 5 minutes');
 
 -- Thai red curry with chicken
-insert into public.recipes (slug, title, description, image_url, image_alt, prep_time, cook_time, rest_time, difficulty, cuisine, servings, rating, review_count, popularity, is_featured, is_vegetarian, is_vegan, is_gluten_free, is_dairy_free, calories, protein, carbohydrates, fat, nutrition_verified, notes, tags, created_at) values ('thai-red-curry', 'Thai red curry with chicken', 'A fragrant coconut curry with crisp green beans, sweet peppers and a squeeze of lime.', 'https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=1200&q=80', 'A bowl of red curry with herbs and chilli on a dark surface', 15, 20, 0, 'easy', 'Thai', 4, 4.6, 187, 81, false, false, false, true, true, 490, 31, 14, 35, false, null, array['weeknight', 'one-pot']::text[], '2026-09-17T09:00:00Z');
+insert into public.recipes (slug, title, description, image_url, image_alt, prep_time, cook_time, rest_time, difficulty, cuisine, servings, rating, review_count, popularity, is_featured, is_vegetarian, is_vegan, is_gluten_free, is_dairy_free, calories, protein, carbohydrates, fat, nutrition_verified, notes, tags, created_at) values ('thai-red-curry', 'Thai red curry with chicken', 'A fragrant coconut curry with crisp green beans, sweet peppers and a squeeze of lime.', 'https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=1200&q=80', 'A bowl of red curry with herbs and chili on a dark surface', 15, 20, 0, 'easy', 'Thai', 4, 4.6, 187, 81, false, false, false, true, true, 490, 31, 14, 35, false, null, array['weeknight', 'one-pot']::text[], '2026-09-17T09:00:00Z');
 insert into public.recipe_categories (recipe_id, category_id) select (select id from public.recipes where slug = 'thai-red-curry'), id from public.categories where slug in ('dinner');
 insert into public.recipe_ingredients (recipe_id, ingredient_id, position, quantity, unit, note, is_optional) values
   ((select id from public.recipes where slug = 'thai-red-curry'), 'vegetable-oil', 1, 1, 'tbsp', null, false),
@@ -667,12 +667,12 @@ insert into public.recipe_steps (recipe_id, step_number, instruction) values
   ((select id from public.recipes where slug = 'greek-salad'), 3, 'Scatter over the olives and lay the feta on top.'),
   ((select id from public.recipes where slug = 'greek-salad'), 4, 'Sprinkle the oregano over the feta, drizzle with the remaining oil and serve with bread to mop up the juices.');
 insert into public.recipe_tips (recipe_id, position, tip) values
-  ((select id from public.recipes where slug = 'greek-salad'), 1, 'Never refrigerate the tomatoes. Cold kills their flavour.');
+  ((select id from public.recipes where slug = 'greek-salad'), 1, 'Never refrigerate the tomatoes. Cold kills their flavor.');
 insert into public.recipe_substitutions (recipe_id, position, ingredient, substitute) values
   ((select id from public.recipes where slug = 'greek-salad'), 1, 'feta', 'A good dairy-free feta-style cheese, or leave it out and add capers');
 
 -- Brown butter chocolate chip cookies
-insert into public.recipes (slug, title, description, image_url, image_alt, prep_time, cook_time, rest_time, difficulty, cuisine, servings, rating, review_count, popularity, is_featured, is_vegetarian, is_vegan, is_gluten_free, is_dairy_free, calories, protein, carbohydrates, fat, nutrition_verified, notes, tags, created_at) values ('brown-butter-chocolate-chip-cookies', 'Brown butter chocolate chip cookies', 'Crisp-edged, chewy-centred cookies with nutty brown butter and pools of dark chocolate.', 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=1200&q=80', 'Chocolate chip cookies scattered on a light surface', 15, 11, 30, 'easy', 'American', 16, 4.9, 588, 96, true, true, false, false, false, 240, 3, 28, 13, false, null, array['bake-ahead', 'crowd-pleaser']::text[], '2026-08-30T09:00:00Z');
+insert into public.recipes (slug, title, description, image_url, image_alt, prep_time, cook_time, rest_time, difficulty, cuisine, servings, rating, review_count, popularity, is_featured, is_vegetarian, is_vegan, is_gluten_free, is_dairy_free, calories, protein, carbohydrates, fat, nutrition_verified, notes, tags, created_at) values ('brown-butter-chocolate-chip-cookies', 'Brown butter chocolate chip cookies', 'Crisp-edged, chewy-centerd cookies with nutty brown butter and pools of dark chocolate.', 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=1200&q=80', 'Chocolate chip cookies scattered on a light surface', 15, 11, 30, 'easy', 'American', 16, 4.9, 588, 96, true, true, false, false, false, 240, 3, 28, 13, false, null, array['bake-ahead', 'crowd-pleaser']::text[], '2026-08-30T09:00:00Z');
 insert into public.recipe_categories (recipe_id, category_id) select (select id from public.recipes where slug = 'brown-butter-chocolate-chip-cookies'), id from public.categories where slug in ('dessert', 'baking', 'snack');
 insert into public.recipe_ingredients (recipe_id, ingredient_id, position, quantity, unit, note, is_optional) values
   ((select id from public.recipes where slug = 'brown-butter-chocolate-chip-cookies'), 'butter', 1, 170, 'g', null, false),
@@ -685,7 +685,7 @@ insert into public.recipe_ingredients (recipe_id, ingredient_id, position, quant
   ((select id from public.recipes where slug = 'brown-butter-chocolate-chip-cookies'), 'salt', 8, 0.5, 'tsp', null, false),
   ((select id from public.recipes where slug = 'brown-butter-chocolate-chip-cookies'), 'dark-chocolate', 9, 200, 'g', 'roughly chopped', false);
 insert into public.recipe_steps (recipe_id, step_number, instruction) values
-  ((select id from public.recipes where slug = 'brown-butter-chocolate-chip-cookies'), 1, 'Melt the butter in a light-coloured pan over medium heat, swirling, until it foams and smells nutty and the solids turn golden brown. Pour into a bowl and cool for 10 minutes.'),
+  ((select id from public.recipes where slug = 'brown-butter-chocolate-chip-cookies'), 1, 'Melt the butter in a light-colored pan over medium heat, swirling, until it foams and smells nutty and the solids turn golden brown. Pour into a bowl and cool for 10 minutes.'),
   ((select id from public.recipes where slug = 'brown-butter-chocolate-chip-cookies'), 2, 'Whisk both sugars into the butter, then beat in the egg, yolk and vanilla until glossy.'),
   ((select id from public.recipes where slug = 'brown-butter-chocolate-chip-cookies'), 3, 'Fold in the flour, baking soda and salt, then the chocolate. Chill the dough for 30 minutes.'),
   ((select id from public.recipes where slug = 'brown-butter-chocolate-chip-cookies'), 4, 'Heat the oven to 180°C (160°C fan) and line two trays with baking paper.'),
@@ -736,7 +736,7 @@ insert into public.recipe_steps (recipe_id, step_number, instruction) values
   ((select id from public.recipes where slug = 'fudgy-brownies'), 2, 'Melt the chocolate and butter together in a bowl set over a pan of barely simmering water. Cool slightly.'),
   ((select id from public.recipes where slug = 'fudgy-brownies'), 3, 'Whisk the sugar and eggs with an electric mixer for 4–5 minutes, until pale, thick and doubled in volume.'),
   ((select id from public.recipes where slug = 'fudgy-brownies'), 4, 'Fold the chocolate mixture into the eggs, then sift over the flour, cocoa and salt and fold until just combined.'),
-  ((select id from public.recipes where slug = 'fudgy-brownies'), 5, 'Pour into the tin and bake for 22–25 minutes, until the top is shiny and set but the centre still wobbles slightly.'),
+  ((select id from public.recipes where slug = 'fudgy-brownies'), 5, 'Pour into the tin and bake for 22–25 minutes, until the top is shiny and set but the center still wobbles slightly.'),
   ((select id from public.recipes where slug = 'fudgy-brownies'), 6, 'Cool completely in the tin before cutting into 16 squares.');
 insert into public.recipe_tips (recipe_id, position, tip) values
   ((select id from public.recipes where slug = 'fudgy-brownies'), 1, 'Whisking the eggs and sugar properly is what creates the crackly, paper-thin top.');
@@ -764,7 +764,7 @@ insert into public.recipe_steps (recipe_id, step_number, instruction) values
   ((select id from public.recipes where slug = 'banana-bread'), 4, 'Scrape into the tin and bake for 55–65 minutes, until a skewer comes out clean. Cover loosely with foil if it browns too quickly.'),
   ((select id from public.recipes where slug = 'banana-bread'), 5, 'Cool in the tin for 10 minutes, then turn out onto a rack.');
 insert into public.recipe_tips (recipe_id, position, tip) values
-  ((select id from public.recipes where slug = 'banana-bread'), 1, 'The blacker the banana skins, the sweeter and more flavourful the loaf.');
+  ((select id from public.recipes where slug = 'banana-bread'), 1, 'The blacker the banana skins, the sweeter and more flavorful the loaf.');
 insert into public.recipe_substitutions (recipe_id, position, ingredient, substitute) values
   ((select id from public.recipes where slug = 'banana-bread'), 1, 'butter', 'Neutral oil, for a dairy-free loaf');
 
@@ -803,7 +803,7 @@ insert into public.recipe_ingredients (recipe_id, ingredient_id, position, quant
   ((select id from public.recipes where slug = 'steak-with-chimichurri'), 'black-pepper', 9, null, null, 'to taste', false);
 insert into public.recipe_steps (recipe_id, step_number, instruction) values
   ((select id from public.recipes where slug = 'steak-with-chimichurri'), 1, 'Take the steak out of the fridge 30 minutes before cooking and season generously with salt.'),
-  ((select id from public.recipes where slug = 'steak-with-chimichurri'), 2, 'Make the chimichurri: stir the parsley, oregano, garlic, chilli flakes, vinegar and olive oil together with a good pinch of salt. Leave to stand while you cook.'),
+  ((select id from public.recipes where slug = 'steak-with-chimichurri'), 2, 'Make the chimichurri: stir the parsley, oregano, garlic, chili flakes, vinegar and olive oil together with a good pinch of salt. Leave to stand while you cook.'),
   ((select id from public.recipes where slug = 'steak-with-chimichurri'), 3, 'Heat a heavy pan or griddle until smoking. Rub the steak with a little oil and sear for 3–4 minutes per side for medium-rare.'),
   ((select id from public.recipes where slug = 'steak-with-chimichurri'), 4, 'Rest the steak on a board for 10 minutes.'),
   ((select id from public.recipes where slug = 'steak-with-chimichurri'), 5, 'Slice thinly across the grain, season with pepper and spoon over the chimichurri.');
@@ -865,7 +865,7 @@ insert into public.recipe_substitutions (recipe_id, position, ingredient, substi
   ((select id from public.recipes where slug = 'chickpea-spinach-curry'), 1, 'spinach', 'Kale (add it 5 minutes earlier) or frozen spinach');
 
 -- Beef bibimbap
-insert into public.recipes (slug, title, description, image_url, image_alt, prep_time, cook_time, rest_time, difficulty, cuisine, servings, rating, review_count, popularity, is_featured, is_vegetarian, is_vegan, is_gluten_free, is_dairy_free, calories, protein, carbohydrates, fat, nutrition_verified, notes, tags, created_at) values ('beef-bibimbap', 'Beef bibimbap', 'Warm rice topped with seasoned vegetables, savoury beef, a fried egg and spicy gochujang sauce.', 'https://images.unsplash.com/photo-1590301157890-4810ed352733?auto=format&fit=crop&w=1200&q=80', 'Bowls of bibimbap with colourful vegetables and a fried egg', 30, 25, 0, 'medium', 'Korean', 4, 4.7, 159, 76, false, false, false, false, true, 620, 30, 74, 22, false, null, array['bowl', 'weekend']::text[], '2026-10-16T09:00:00Z');
+insert into public.recipes (slug, title, description, image_url, image_alt, prep_time, cook_time, rest_time, difficulty, cuisine, servings, rating, review_count, popularity, is_featured, is_vegetarian, is_vegan, is_gluten_free, is_dairy_free, calories, protein, carbohydrates, fat, nutrition_verified, notes, tags, created_at) values ('beef-bibimbap', 'Beef bibimbap', 'Warm rice topped with seasoned vegetables, savory beef, a fried egg and spicy gochujang sauce.', 'https://images.unsplash.com/photo-1590301157890-4810ed352733?auto=format&fit=crop&w=1200&q=80', 'Bowls of bibimbap with colorful vegetables and a fried egg', 30, 25, 0, 'medium', 'Korean', 4, 4.7, 159, 76, false, false, false, false, true, 620, 30, 74, 22, false, null, array['bowl', 'weekend']::text[], '2026-10-16T09:00:00Z');
 insert into public.recipe_categories (recipe_id, category_id) select (select id from public.recipes where slug = 'beef-bibimbap'), id from public.categories where slug in ('dinner', 'lunch');
 insert into public.recipe_ingredients (recipe_id, ingredient_id, position, quantity, unit, note, is_optional) values
   ((select id from public.recipes where slug = 'beef-bibimbap'), 'sushi-rice', 1, 300, 'g', null, false),
@@ -942,7 +942,7 @@ insert into public.recipe_ingredients (recipe_id, ingredient_id, position, quant
   ((select id from public.recipes where slug = 'roasted-chickpea-quinoa-bowl'), 'sesame-seeds', 14, 1, 'tbsp', null, true);
 insert into public.recipe_steps (recipe_id, step_number, instruction) values
   ((select id from public.recipes where slug = 'roasted-chickpea-quinoa-bowl'), 1, 'Heat the oven to 210°C (190°C fan). Toss the sweet potato and chickpeas with the olive oil, paprika and salt on a large tray.'),
-  ((select id from public.recipes where slug = 'roasted-chickpea-quinoa-bowl'), 2, 'Roast for 25–30 minutes, shaking halfway, until the potato is caramelised and the chickpeas crisp.'),
+  ((select id from public.recipes where slug = 'roasted-chickpea-quinoa-bowl'), 2, 'Roast for 25–30 minutes, shaking halfway, until the potato is caramelized and the chickpeas crisp.'),
   ((select id from public.recipes where slug = 'roasted-chickpea-quinoa-bowl'), 3, 'Meanwhile, rinse the quinoa and simmer in twice its volume of salted water for 12–15 minutes, until tender. Drain and steam dry.'),
   ((select id from public.recipes where slug = 'roasted-chickpea-quinoa-bowl'), 4, 'Whisk the tahini, lemon juice, garlic and maple syrup with enough water to make a pourable dressing. Season.'),
   ((select id from public.recipes where slug = 'roasted-chickpea-quinoa-bowl'), 5, 'Build the bowls with quinoa, arugula, cabbage, the roasted vegetables and avocado. Drizzle with dressing and sprinkle with sesame seeds.');
@@ -965,7 +965,7 @@ insert into public.recipe_ingredients (recipe_id, ingredient_id, position, quant
   ((select id from public.recipes where slug = 'penne-arrabbiata'), 'parmesan', 8, 30, 'g', 'to serve', true);
 insert into public.recipe_steps (recipe_id, step_number, instruction) values
   ((select id from public.recipes where slug = 'penne-arrabbiata'), 1, 'Bring a large pan of well-salted water to the boil.'),
-  ((select id from public.recipes where slug = 'penne-arrabbiata'), 2, 'Gently warm the olive oil, garlic and chilli flakes in a wide pan over low heat until the garlic is just golden.'),
+  ((select id from public.recipes where slug = 'penne-arrabbiata'), 2, 'Gently warm the olive oil, garlic and chili flakes in a wide pan over low heat until the garlic is just golden.'),
   ((select id from public.recipes where slug = 'penne-arrabbiata'), 3, 'Add the tomatoes and a pinch of salt and simmer for 15 minutes, until thick.'),
   ((select id from public.recipes where slug = 'penne-arrabbiata'), 4, 'Meanwhile, cook the penne until al dente. Reserve a mug of pasta water, then drain.'),
   ((select id from public.recipes where slug = 'penne-arrabbiata'), 5, 'Toss the pasta in the sauce with a splash of pasta water until glossy. Stir through the parsley and serve with parmesan.');
@@ -995,32 +995,36 @@ insert into public.recipe_steps (recipe_id, step_number, instruction) values
   ((select id from public.recipes where slug = 'roasted-tomato-soup'), 4, 'Add most of the basil and blend until smooth. Season to taste, loosening with water if needed.'),
   ((select id from public.recipes where slug = 'roasted-tomato-soup'), 5, 'Serve topped with the remaining basil, a drizzle of olive oil and toast on the side.');
 insert into public.recipe_tips (recipe_id, position, tip) values
-  ((select id from public.recipes where slug = 'roasted-tomato-soup'), 1, 'Out of season, use cherry tomatoes. They have far more flavour than large winter tomatoes.');
+  ((select id from public.recipes where slug = 'roasted-tomato-soup'), 1, 'Out of season, use cherry tomatoes. They have far more flavor than large winter tomatoes.');
 insert into public.recipe_substitutions (recipe_id, position, ingredient, substitute) values
   ((select id from public.recipes where slug = 'roasted-tomato-soup'), 1, 'vegetable stock', 'Chicken stock, if you don''t need it vegetarian');
 
--- Strawberry and cream pavlova
-insert into public.recipes (slug, title, description, image_url, image_alt, prep_time, cook_time, rest_time, difficulty, cuisine, servings, rating, review_count, popularity, is_featured, is_vegetarian, is_vegan, is_gluten_free, is_dairy_free, calories, protein, carbohydrates, fat, nutrition_verified, notes, tags, created_at) values ('strawberry-pavlova', 'Strawberry and cream pavlova', 'A crisp meringue shell with a soft marshmallow centre, heaped with whipped cream and strawberries.', 'https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=1200&q=80', 'A pavlova topped with whipped cream and fresh strawberries', 25, 75, 60, 'medium', 'Australian', 8, 4.7, 136, 62, false, true, false, true, false, 290, 3, 34, 16, false, null, array['entertaining', 'summer']::text[], '2026-10-28T09:00:00Z');
-insert into public.recipe_categories (recipe_id, category_id) select (select id from public.recipes where slug = 'strawberry-pavlova'), id from public.categories where slug in ('dessert', 'baking');
+-- Strawberry crêpes with whipped cream
+insert into public.recipes (slug, title, description, image_url, image_alt, prep_time, cook_time, rest_time, difficulty, cuisine, servings, rating, review_count, popularity, is_featured, is_vegetarian, is_vegan, is_gluten_free, is_dairy_free, calories, protein, carbohydrates, fat, nutrition_verified, notes, tags, created_at) values ('strawberry-crepes', 'Strawberry crêpes with whipped cream', 'Thin, buttery crêpes folded around sweet strawberries and soft whipped cream. Easier than they look.', 'https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=1200&q=80', 'Folded crêpes topped with whipped cream and fresh strawberries on a white plate', 10, 20, 30, 'easy', 'French', 4, 4.7, 136, 62, false, true, false, false, false, 340, 9, 38, 17, false, 'Cooked crêpes keep for 2 days in the fridge, stacked between sheets of baking paper. Warm them in a dry pan.', array['brunch', 'weekend', 'beginner-friendly']::text[], '2026-10-28T09:00:00Z');
+insert into public.recipe_categories (recipe_id, category_id) select (select id from public.recipes where slug = 'strawberry-crepes'), id from public.categories where slug in ('breakfast', 'dessert');
 insert into public.recipe_ingredients (recipe_id, ingredient_id, position, quantity, unit, note, is_optional) values
-  ((select id from public.recipes where slug = 'strawberry-pavlova'), 'eggs', 1, 4, null, 'whites only, at room temperature', false),
-  ((select id from public.recipes where slug = 'strawberry-pavlova'), 'sugar', 2, 220, 'g', null, false),
-  ((select id from public.recipes where slug = 'strawberry-pavlova'), 'cornstarch', 3, 1, 'tsp', null, false),
-  ((select id from public.recipes where slug = 'strawberry-pavlova'), 'white-wine-vinegar', 4, 1, 'tsp', null, false),
-  ((select id from public.recipes where slug = 'strawberry-pavlova'), 'vanilla-extract', 5, 1, 'tsp', null, false),
-  ((select id from public.recipes where slug = 'strawberry-pavlova'), 'heavy-cream', 6, 300, 'ml', null, false),
-  ((select id from public.recipes where slug = 'strawberry-pavlova'), 'strawberries', 7, 400, 'g', 'hulled and halved', false),
-  ((select id from public.recipes where slug = 'strawberry-pavlova'), 'mint', 8, 4, 'sprig', null, true);
+  ((select id from public.recipes where slug = 'strawberry-crepes'), 'flour', 1, 125, 'g', null, false),
+  ((select id from public.recipes where slug = 'strawberry-crepes'), 'eggs', 2, 2, null, null, false),
+  ((select id from public.recipes where slug = 'strawberry-crepes'), 'milk', 3, 300, 'ml', null, false),
+  ((select id from public.recipes where slug = 'strawberry-crepes'), 'butter', 4, 30, 'g', 'melted, plus extra for the pan', false),
+  ((select id from public.recipes where slug = 'strawberry-crepes'), 'sugar', 5, 1, 'tbsp', null, false),
+  ((select id from public.recipes where slug = 'strawberry-crepes'), 'vanilla-extract', 6, 1, 'tsp', null, false),
+  ((select id from public.recipes where slug = 'strawberry-crepes'), 'salt', 7, 1, 'pinch', null, false),
+  ((select id from public.recipes where slug = 'strawberry-crepes'), 'heavy-cream', 8, 200, 'ml', null, false),
+  ((select id from public.recipes where slug = 'strawberry-crepes'), 'powdered-sugar', 9, 1, 'tbsp', null, false),
+  ((select id from public.recipes where slug = 'strawberry-crepes'), 'strawberries', 10, 300, 'g', 'hulled and halved', false);
 insert into public.recipe_steps (recipe_id, step_number, instruction) values
-  ((select id from public.recipes where slug = 'strawberry-pavlova'), 1, 'Heat the oven to 150°C (130°C fan). Draw a 22 cm circle on baking paper and flip it onto a tray.'),
-  ((select id from public.recipes where slug = 'strawberry-pavlova'), 2, 'Whisk the egg whites to stiff peaks, then add the sugar a spoonful at a time, whisking well after each, until glossy and thick.'),
-  ((select id from public.recipes where slug = 'strawberry-pavlova'), 3, 'Whisk in the cornstarch, vinegar and vanilla.'),
-  ((select id from public.recipes where slug = 'strawberry-pavlova'), 4, 'Spread the meringue within the circle, building up the sides to make a shallow nest.'),
-  ((select id from public.recipes where slug = 'strawberry-pavlova'), 5, 'Bake for 1 hour 15 minutes, then turn off the oven and leave the meringue inside with the door ajar to cool completely.'),
-  ((select id from public.recipes where slug = 'strawberry-pavlova'), 6, 'Whip the cream to soft peaks. Just before serving, spoon it onto the meringue and pile on the strawberries and mint.');
+  ((select id from public.recipes where slug = 'strawberry-crepes'), 1, 'Whisk the flour, sugar and salt in a bowl. Make a well, add the eggs and about a third of the milk, and whisk to a smooth paste.'),
+  ((select id from public.recipes where slug = 'strawberry-crepes'), 2, 'Gradually whisk in the rest of the milk, then the melted butter and vanilla. The batter should be as thin as single cream. Rest it for 30 minutes.'),
+  ((select id from public.recipes where slug = 'strawberry-crepes'), 3, 'Heat a non-stick frying pan over medium heat and wipe it with a little butter. Pour in about 60 ml of batter and tilt the pan straight away so it coats the base thinly.'),
+  ((select id from public.recipes where slug = 'strawberry-crepes'), 4, 'Cook for about 1 minute, until the edges lift and the underside is golden. Flip with a spatula and cook for 30 seconds more. Stack the crêpes on a plate while you cook the rest.'),
+  ((select id from public.recipes where slug = 'strawberry-crepes'), 5, 'Whip the cream with the powdered sugar to soft peaks.'),
+  ((select id from public.recipes where slug = 'strawberry-crepes'), 6, 'Fold each crêpe into quarters, top with whipped cream and strawberries, and serve straight away.');
 insert into public.recipe_tips (recipe_id, position, tip) values
-  ((select id from public.recipes where slug = 'strawberry-pavlova'), 1, 'Rub a little meringue between your fingers. If it feels gritty, keep whisking until the sugar dissolves.');
+  ((select id from public.recipes where slug = 'strawberry-crepes'), 1, 'The first crêpe is usually a practice one. Use it to check the heat and how much batter you need.'),
+  ((select id from public.recipes where slug = 'strawberry-crepes'), 2, 'If the batter is lumpy, push it through a sieve. Nobody will know.');
 insert into public.recipe_substitutions (recipe_id, position, ingredient, substitute) values
-  ((select id from public.recipes where slug = 'strawberry-pavlova'), 1, 'strawberries', 'Passion fruit, raspberries or sliced mango');
+  ((select id from public.recipes where slug = 'strawberry-crepes'), 1, 'strawberries', 'Sliced banana, raspberries or a squeeze of lemon and sugar'),
+  ((select id from public.recipes where slug = 'strawberry-crepes'), 2, 'heavy cream', 'Greek yogurt sweetened with a little honey');
 
 commit;

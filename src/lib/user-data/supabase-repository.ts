@@ -20,6 +20,8 @@ function check<T>(res: { data: T; error: { message: string } | null }, what: str
  * Account storage. Every table is protected by row level security
  * (`auth.uid() = user_id`), so these queries can only ever touch the
  * signed-in user's own rows.
+ *
+ * @public Loaded with a dynamic import from the user-data provider.
  */
 export function createSupabaseRepository(supabase: SupabaseClient, userId: string): UserDataRepository {
   return {

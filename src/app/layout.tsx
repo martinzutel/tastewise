@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Manrope } from "next/font/google";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { StorageErrorBanner } from "@/components/layout/storage-error-banner";
 import { Toaster } from "@/components/ui/sonner";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { getCurrentUser } from "@/lib/supabase/server";
@@ -51,6 +52,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         </a>
         <UserDataProvider user={sessionUser}>
           <SiteHeader authEnabled={isSupabaseConfigured} />
+          <StorageErrorBanner />
           <main id="main" className="min-h-[70vh] pb-24 lg:pb-0">
             {children}
           </main>

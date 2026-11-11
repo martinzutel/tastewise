@@ -3,11 +3,11 @@ import { deriveDiets } from "../../lib/services/diet.ts";
 import { INGREDIENTS_BY_ID } from "./ingredients.ts";
 import { SEED_RECIPES, type SeedRecipe } from "./recipes.ts";
 
-export function unsplashUrl(photoId: string, width = 1200): string {
+function unsplashUrl(photoId: string, width = 1200): string {
   return `https://images.unsplash.com/photo-${photoId}?auto=format&fit=crop&w=${width}&q=80`;
 }
 
-export function hydrateRecipe(seed: SeedRecipe): Recipe {
+function hydrateRecipe(seed: SeedRecipe): Recipe {
   const ingredients: RecipeIngredient[] = seed.ingredients.map(([id, quantity, unit, note, optional]) => {
     const ing = INGREDIENTS_BY_ID[id];
     if (!ing) throw new Error(`Recipe "${seed.slug}" references unknown ingredient "${id}"`);

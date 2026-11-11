@@ -4,7 +4,7 @@
  *
  *   npm run db:seed:generate
  *
- * Runs on Node 22.6+ with native TypeScript type stripping.
+ * Runs on Node 22.18+ with native TypeScript type stripping.
  */
 import { writeFileSync } from "node:fs";
 import { CATEGORY_LABELS } from "../src/lib/constants.ts";

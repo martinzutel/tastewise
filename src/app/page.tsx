@@ -6,7 +6,7 @@ import { Hero } from "@/components/discover/hero";
 import { PantryPromo } from "@/components/discover/pantry-promo";
 import { PopularList } from "@/components/discover/popular-list";
 import { RecentList } from "@/components/discover/recent-list";
-import { RecipeRail } from "@/components/discover/recipe-rail";
+import { RecipeRail } from "@/components/recipe/recipe-rail";
 import { SectionHeading } from "@/components/common/page-header";
 import { listIngredients, listRecipeSummaries } from "@/lib/data/recipes";
 import { matchPantry } from "@/lib/services/pantry-matching";
